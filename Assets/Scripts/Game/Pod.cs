@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using DG.Tweening;
 
@@ -24,6 +25,14 @@ public class Pod : MonoBehaviour
 
     /** Number of steps between delivery and death. */
     public int StepsToDeath;
+
+    /** Pod capsule. */
+    public Transform Capsule;
+
+    /** Return the current score for this pod. */
+    public int Score
+    { get { return Slots.Sum(slot => slot.Score); } }
+
 
 
     // Unity Implementation
@@ -57,7 +66,8 @@ public class Pod : MonoBehaviour
         for (int i = 0; i < StepsToDeliver; i++)
             yield return StartCoroutine(Advance());
 
-        // TODO: Deliver the pod.
+        // Deliver the pod.
+        Deliver();
 
         // Advance until it's time to die.
         for (int i = 0; i < StepsToDeath; i++)
@@ -91,6 +101,20 @@ public class Pod : MonoBehaviour
 
         // Kill the blob.
         Destroy(blob.gameObject);
+    }
+
+    /** Deliver the pod. */
+    private void Deliver()
+    {
+        // Determine if pod meets the grade.
+        var passes = Score > 0;
+
+        // Move pod up or down depending on whether it passes.
+        if (passes)
+            Capsule.DOMoveY(10, 0.5f).SetRelative();
+        else
+            Capsule.DOMoveY(-10, 0.5f).SetRelative();
+
     }
 
 

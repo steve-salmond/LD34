@@ -24,6 +24,45 @@ public class PodSlot : MonoBehaviour
     /** Renderer for the 'good/bad' light. */
     public MeshRenderer LightMesh;
 
+    /** Score for good slot state. */
+    public int GoodScore;
+
+    /** Score for bad slot state. */
+    public int BadScore;
+
+    /** Score for empty slot state. */
+    public int EmptyScore;
+
+    /** Whether slot is empty. */
+    public bool IsEmpty
+    { get { return Current == Nutrient.None; } }
+
+    /** Whether slot is full. */
+    public bool IsFull
+    { get { return Current != Nutrient.None; } }
+
+    /** Whether slot is filled correctly. */
+    public bool IsGood
+    { get { return IsFull && Current == Requested; } }
+
+    /** Whether slot is filled incorrectly. */
+    public bool IsBad
+    { get { return IsFull && Current != Requested; } }
+
+    /** Return the current score for this pod. */
+    public int Score
+    {
+        get
+        {
+            if (IsGood)
+                return GoodScore;
+            else if (IsBad)
+                return BadScore;
+            else
+                return EmptyScore;
+        }
+    }
+
 
     // Unity Implementation
     // -----------------------------------------------------
@@ -66,6 +105,9 @@ public class PodSlot : MonoBehaviour
         // Consume the blob.
         SetCurrent(blob.Nutrient);
 
+        // Update game score.
+        GameController.Instance.AddScore(Score);
+
         return true;
     }
 
@@ -84,6 +126,7 @@ public class PodSlot : MonoBehaviour
     private void SetCurrent(Nutrient nutrient)
     {
         Current = nutrient;
+
         SetEmissionColor(CurrentMesh, GetNutrientConfig(nutrient).Color);
         SetEmissionColor(LightMesh, Current == Requested ? Color.green : Color.red);
     }
