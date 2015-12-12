@@ -6,8 +6,28 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Human_Adult
+    100004: Human_Baby
+    100006: Human_Child
+    100008: Human_Fetus
     400000: //RootNode
+    400002: Human_Adult
+    400004: Human_Baby
+    400006: Human_Child
+    400008: Human_Fetus
+    2300000: Human_Adult
+    2300002: Human_Baby
+    2300004: Human_Child
+    2300006: Human_Fetus
+    3300000: Human_Adult
+    3300002: Human_Baby
+    3300004: Human_Child
+    3300006: Human_Fetus
     4300000: Human
+    4300002: Human_Baby
+    4300004: Human_Fetus
+    4300006: Human_Child
+    4300008: Human_Adult
     9500000: //RootNode
     13700000: //RootNode
   materials:
