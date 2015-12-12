@@ -107,7 +107,13 @@ public class Pod : MonoBehaviour
     private void Deliver()
     {
         // Determine if pod meets the grade.
-        var passes = Score > 0;
+        var passes = Slots.Count(slot => slot.IsGood) >= 2;
+
+        // Update game score.
+        GameController.Instance.AddScore(Score);
+
+        // Shake the pod a bit.
+        transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);
 
         // Move pod up or down depending on whether it passes.
         if (passes)
