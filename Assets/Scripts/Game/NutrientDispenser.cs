@@ -24,6 +24,9 @@ public class NutrientDispenser : MonoBehaviour
     /** Blob's light mesh. */
     public MeshRenderer LightMesh;
 
+    /** Whether nutrient is being dispensed. */
+    public bool Dispensing
+    { get; private set; }
 
     // Private Properties
     // -----------------------------------------------------
@@ -31,6 +34,7 @@ public class NutrientDispenser : MonoBehaviour
     /** Nutrient configuration. */
     private NutrientConfig NutrientConfig
     { get { return GameController.Instance.GetNutrientConfig(Nutrient); } }
+
 
 
     // Unity Implementation
@@ -48,6 +52,14 @@ public class NutrientDispenser : MonoBehaviour
         StartCoroutine(UpdateRoutine());
     }
 
+    /** Dispense when player clicks on dispenser. */
+    void OnMouseDown()
+    {
+        var working = GameController.Instance.IsWorking;
+        if (working && !Dispensing)
+            StartCoroutine(Dispense());
+    }
+
 
     // Coroutines
     // -----------------------------------------------------
@@ -58,7 +70,7 @@ public class NutrientDispenser : MonoBehaviour
         while (true)
         {
             var working = GameController.Instance.IsWorking;
-            if (working && Input.GetKeyDown(Key))
+            if (working && Input.GetKeyDown(Key) && !Dispensing)
                 yield return StartCoroutine(Dispense());
 
             yield return 0;
@@ -68,6 +80,8 @@ public class NutrientDispenser : MonoBehaviour
     /** Dispense nutrients. */
     private IEnumerator Dispense()
     {
+        Dispensing = true;
+
         transform.DOPunchScale(Vector3.one * 0.1f, Cooldown);
 
         // Emit a blob of nutrients.
@@ -77,6 +91,8 @@ public class NutrientDispenser : MonoBehaviour
 
         // Wait until cooldown expires.
         yield return new WaitForSeconds(Cooldown);
+
+        Dispensing = false;
     }
 
 }

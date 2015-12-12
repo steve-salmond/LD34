@@ -205,7 +205,7 @@ public class GameController : Singleton<GameController>
     {
         while (State == GameState.Working)
         {
-            var pod = Instantiate<Pod>(PodPrefab);
+            var pod = Instantiate(PodPrefab);
             pod.StepTime = PodStepTime;
 
             yield return new WaitForSeconds(PodInterval);
