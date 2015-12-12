@@ -6,10 +6,19 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Dispenser
+    100004: Dispenser_Light
     400000: //RootNode
+    400002: Dispenser
+    400004: Dispenser_Light
     2300000: //RootNode
+    2300002: Dispenser
+    2300004: Dispenser_Light
     3300000: //RootNode
+    3300002: Dispenser
+    3300004: Dispenser_Light
     4300000: Dispenser
+    4300002: Dispenser_Light
   materials:
     importMaterials: 1
     materialName: 0
