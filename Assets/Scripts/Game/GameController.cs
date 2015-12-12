@@ -66,6 +66,9 @@ public class GameController : Singleton<GameController>
     /** Prefab for creating new pods. */
     public Pod PodPrefab;
 
+    /** Spawn point for new pods. */
+    public Transform PodSpawnPoint;
+
 
     // Pod configuration properties
     // -----------------------------------------------------
@@ -170,6 +173,10 @@ public class GameController : Singleton<GameController>
     private IEnumerator IntroRoutine()
     {
         SetState(GameState.Intro);
+
+        // Look at monitor.
+        CameraController.Instance.LookAtMonitor();
+
         yield return new WaitForSeconds(1);
     }
 
@@ -177,6 +184,9 @@ public class GameController : Singleton<GameController>
     private IEnumerator MorningRoutine()
     {
         SetState(GameState.Morning);
+
+        // Look at monitor.
+        CameraController.Instance.LookAtMonitor();
 
         // Set up today's shift.
         Day = Day + 1;
@@ -190,6 +200,9 @@ public class GameController : Singleton<GameController>
     private IEnumerator WorkRoutine()
     {
         SetState(GameState.Working);
+
+        // Look at working area.
+        CameraController.Instance.LookAtWorkArea();
 
         // Determine when today's shift will end.
         var endOfDay = Time.time + Duration;
@@ -219,7 +232,7 @@ public class GameController : Singleton<GameController>
     {
         while (State == GameState.Working)
         {
-            Instantiate(PodPrefab);
+            Instantiate(PodPrefab, PodSpawnPoint.position, Quaternion.identity);
             yield return new WaitForSeconds(PodInterval);
         }
     }
@@ -228,6 +241,10 @@ public class GameController : Singleton<GameController>
     private IEnumerator EveningRoutine()
     {
         SetState(GameState.Evening);
+
+        // Look at monitor.
+        CameraController.Instance.LookAtMonitor();
+
         yield return new WaitForSeconds(5);
 
         // Check if player has failed to meet today's quota.
@@ -241,6 +258,10 @@ public class GameController : Singleton<GameController>
     private IEnumerator GameOverRoutine()
     {
         SetState(GameState.GameOver);
+
+        // Look at monitor.
+        CameraController.Instance.LookAtMonitor();
+
         yield return new WaitForSeconds(5);
         yield return 0;
     }
