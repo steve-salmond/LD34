@@ -56,9 +56,6 @@ public class GameController : Singleton<GameController>
     /** Prefab for creating new pods. */
     public Pod PodPrefab;
 
-    /** Information about nutrients. */
-    public List<NutrientConfig> Nutrients;
-
 
     // Private properties
     // -----------------------------------------------------
@@ -71,8 +68,8 @@ public class GameController : Singleton<GameController>
     // Members
     // -----------------------------------------------------
 
-    
-
+    /** Nutrient configuration lookup. */
+    private Dictionary<Nutrient, NutrientConfig> _nutrientLookup;
 
 
     // Public Methods
@@ -93,8 +90,17 @@ public class GameController : Singleton<GameController>
     /** Nutrient configuration. */
     public NutrientConfig GetNutrientConfig(Nutrient type)
     {
-        // TODO: Implement
-        return Nutrients[0];
+        // Populate lookup on demand.
+        if (_nutrientLookup == null)
+        {
+            var configs = GetComponentsInChildren<NutrientConfig>();
+            _nutrientLookup = new Dictionary<Nutrient, NutrientConfig>();
+            foreach (var config in configs)
+                _nutrientLookup[config.Type] = config;
+        }
+
+        // Perform nutrient lookup.
+        return _nutrientLookup[type];
     }
 
 
@@ -106,6 +112,7 @@ public class GameController : Singleton<GameController>
     {
         // Reset the current day.
         Day = 0;
+
     }
 
     /** Initialization. */

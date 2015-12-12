@@ -4,6 +4,9 @@ using System.Collections;
 public class NutrientDispenser : MonoBehaviour
 {
 
+    // Properties
+    // -----------------------------------------------------
+
     /** The type of nutrient dispensed. */
     public Nutrient Nutrient;
 
@@ -13,8 +16,12 @@ public class NutrientDispenser : MonoBehaviour
     /** Location to emit from. */
     public Transform Emitter;
 
+
+    // Private Properties
+    // -----------------------------------------------------
+
     /** Nutrient configuration. */
-    public NutrientConfig NutrientConfig
+    private NutrientConfig NutrientConfig
     { get { return GameController.Instance.GetNutrientConfig(Nutrient); } }
 
 
@@ -27,6 +34,7 @@ public class NutrientDispenser : MonoBehaviour
         // Fire up the game control routine.
         StartCoroutine(UpdateRoutine());
     }
+
 
     // Coroutines
     // -----------------------------------------------------
