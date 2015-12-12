@@ -6,10 +6,19 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Pod
+    100004: PodWater
     400000: //RootNode
+    400002: Pod
+    400004: PodWater
     2300000: //RootNode
+    2300002: Pod
+    2300004: PodWater
     3300000: //RootNode
+    3300002: Pod
+    3300004: PodWater
     4300000: Pod
+    4300002: PodWater
   materials:
     importMaterials: 1
     materialName: 0
