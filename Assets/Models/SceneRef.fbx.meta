@@ -1,15 +1,47 @@
 fileFormatVersion: 2
-guid: 354684313c353a446bad741d4544a81b
+guid: ae30cc9d9b0fdbb40bbd8876eb49ad19
 timeCreated: 1449907085
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Room
+    100000: Button
+    100002: ChuteBottom
+    100004: ChuteTop
+    100006: Dispenser
+    100008: Pod
+    100010: PodHolder
+    100012: Room
+    100014: //RootNode
+    400000: Button
+    400002: ChuteBottom
+    400004: ChuteTop
+    400006: Dispenser
+    400008: Pod
+    400010: PodHolder
+    400012: Room
+    400014: //RootNode
+    2300000: Button
+    2300002: ChuteBottom
+    2300004: ChuteTop
+    2300006: Dispenser
+    2300008: Pod
+    2300010: PodHolder
+    2300012: Room
+    3300000: Button
+    3300002: ChuteBottom
+    3300004: ChuteTop
+    3300006: Dispenser
+    3300008: Pod
+    3300010: PodHolder
+    3300012: Room
+    4300000: Pod
+    4300002: ChuteBottom
+    4300004: Button
+    4300006: ChuteTop
+    4300008: Dispenser
+    4300010: PodHolder
+    4300012: Room
   materials:
     importMaterials: 1
     materialName: 0
