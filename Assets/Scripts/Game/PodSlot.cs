@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
+
 
 public class PodSlot : MonoBehaviour
 {
@@ -26,11 +28,16 @@ public class PodSlot : MonoBehaviour
     /** Initialization. */
     private void Start()
     {
+
+        /*
         // Pick a random required nutrient.
         var first = (int) Nutrient.Oxygen;
         var last = (int) Nutrient.Sodium;
         var request = (Nutrient) Random.Range(first, last + 1);
         SetRequested(request);
+        */
+
+        SetRequested(Nutrient.Oxygen);
     }
 
 
@@ -70,13 +77,25 @@ public class PodSlot : MonoBehaviour
     {
         NutrientRequested = nutrient;
 
-        // RequestMesh.material.color = 
+        var config = GetNutrientConfig(nutrient);
+        RequestMesh.material = new Material(RequestMesh.material);
+        RequestMesh.material.EnableKeyword("_EMISSION");
+        RequestMesh.material.DOColor(config.Color, "_EmissionColor", 0.25f);
     }
 
     /** Set the required nutrient. */
     private void SetCurrent(Nutrient nutrient)
     {
         NutrientCurrent = nutrient;
+
+        var config = GetNutrientConfig(nutrient);
+        CurrentMesh.material = new Material(CurrentMesh.material);
+        CurrentMesh.material.EnableKeyword("_EMISSION");
+        CurrentMesh.material.DOColor(config.Color, "_EmissionColor", 0.25f);
     }
+
+    /** Nutrient configuration. */
+    private NutrientConfig GetNutrientConfig(Nutrient nutrient)
+    { return GameController.Instance.GetNutrientConfig(nutrient); }
 
 }

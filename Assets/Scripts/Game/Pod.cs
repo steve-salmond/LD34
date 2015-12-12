@@ -81,12 +81,10 @@ public class Pod : MonoBehaviour
     /** Consume a nutrient blob. */
     private void Consume(NutrientBlob blob)
     {
-        // Add nutrients.
+        // Ask each slot if it wants the nutrient.
         foreach (var slot in Slots)
             if (slot.Consume(blob))
-            {
-
-            }
+                break;
 
         // Kill the blob.
         Destroy(blob.gameObject);
