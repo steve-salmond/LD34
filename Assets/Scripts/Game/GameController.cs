@@ -46,6 +46,20 @@ public class GameController : Singleton<GameController>
     /** Curve indicating the initial time allocated on a given day. */
     public AnimationCurve QuotaCurve;
 
+    /** Curve indicating the time between pods on a given day. */
+    public AnimationCurve PodTimingCurve;
+
+    /** Prefab for creating new pods. */
+    public Pod PodPrefab;
+
+
+    // Private properties
+    // -----------------------------------------------------
+
+    /** Returns the current pod spawn timing. */
+    private float PodTiming
+    { get { return Mathf.RoundToInt(PodTimingCurve.Evaluate(Day)); } }
+
 
     // Public Methods
     // -----------------------------------------------------
@@ -106,7 +120,7 @@ public class GameController : Singleton<GameController>
     private IEnumerator IntroRoutine()
     {
         SetState(GameState.Intro);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
     }
 
     /** Handle the morning before a day's shift. */
@@ -119,7 +133,7 @@ public class GameController : Singleton<GameController>
         Quota = Mathf.RoundToInt(QuotaCurve.Evaluate(Day));
         Duration = Mathf.RoundToInt(DurationCurve.Evaluate(Day));
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
     }
 
     /** Handle a day's shift. */
@@ -129,6 +143,9 @@ public class GameController : Singleton<GameController>
 
         // Determine when today's shift will end.
         var endOfDay = Time.time + Duration;
+
+        // Start coroutine for spawning pods.
+        StartCoroutine(SpawnPodRoutine());
 
         // Wait until the day is over.
         while (Time.time < endOfDay)
@@ -145,6 +162,17 @@ public class GameController : Singleton<GameController>
         TimeLeft = 0;
 
         yield return 0;
+    }
+
+    /** Handle the end of a day's shift. */
+    private IEnumerator SpawnPodRoutine()
+    {
+        while (State == GameState.Working)
+        {
+            var pod = Instantiate<Pod>(PodPrefab);
+
+            yield return new WaitForSeconds(PodTiming);
+        }
     }
 
     /** Handle the end of a day's shift. */
