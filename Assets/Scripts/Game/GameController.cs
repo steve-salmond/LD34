@@ -50,8 +50,11 @@ public class GameController : Singleton<GameController>
     /** Curve indicating the initial time allocated on a given day. */
     public AnimationCurve QuotaCurve;
 
-    /** Curve indicating the time between pods on a given day. */
-    public AnimationCurve PodTimingCurve;
+    /** Curve indicating the interval between successive pods on a given day. */
+    public AnimationCurve PodIntervalCurve;
+
+    /** Curve indicating the time-step speed of pods on a given day. */
+    public AnimationCurve PodStepTimeCurve;
 
     /** Prefab for creating new pods. */
     public Pod PodPrefab;
@@ -61,8 +64,12 @@ public class GameController : Singleton<GameController>
     // -----------------------------------------------------
 
     /** Returns the current pod spawn timing. */
-    private float PodTiming
-    { get { return Mathf.RoundToInt(PodTimingCurve.Evaluate(Day)); } }
+    private float PodInterval
+    { get { return PodIntervalCurve.Evaluate(Day); } }
+
+    /** Returns the current pod time-step. */
+    private float PodStepTime
+    { get { return PodStepTimeCurve.Evaluate(Day); } }
 
 
     // Members
@@ -198,9 +205,9 @@ public class GameController : Singleton<GameController>
         while (State == GameState.Working)
         {
             var pod = Instantiate<Pod>(PodPrefab);
-            pod.StepTime = PodTiming;
+            pod.StepTime = PodStepTime;
 
-            yield return new WaitForSeconds(PodTiming);
+            yield return new WaitForSeconds(PodInterval);
         }
     }
 

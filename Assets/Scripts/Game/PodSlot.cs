@@ -10,16 +10,19 @@ public class PodSlot : MonoBehaviour
     // -----------------------------------------------------
 
     /** The nutrient currently in this slot. */
-    public Nutrient NutrientCurrent;
+    public Nutrient Current;
 
     /** THe nutrient required by this slot. */
-    public Nutrient NutrientRequested;
+    public Nutrient Requested;
 
     /** Renderer that displays requested nutrient. */
     public MeshRenderer RequestMesh;
 
     /** Renderer that displays current nutrient. */
     public MeshRenderer CurrentMesh;
+
+    /** Renderer for the 'good/bad' light. */
+    public MeshRenderer LightMesh;
 
 
     // Unity Implementation
@@ -43,11 +46,14 @@ public class PodSlot : MonoBehaviour
     public bool CanConsume(NutrientBlob blob)
     {
         // Check if we already have a nutrient.
-        if (NutrientCurrent != Nutrient.None)
+        if (Current != Nutrient.None)
             return false;
 
+        // Always accept a blob even if it's the wrong color.
+        return true;
+
         // If not, check if blob is the right type.
-        return blob.Nutrient == NutrientRequested;
+        // return blob.Nutrient == NutrientRequested;
     }
 
     /** Try to consume a nutrient blob. */
@@ -70,23 +76,23 @@ public class PodSlot : MonoBehaviour
     /** Set the required nutrient. */
     private void SetRequested(Nutrient nutrient)
     {
-        NutrientRequested = nutrient;
-
-        var config = GetNutrientConfig(nutrient);
-        RequestMesh.material = new Material(RequestMesh.material);
-        RequestMesh.material.EnableKeyword("_EMISSION");
-        RequestMesh.material.DOColor(config.Color, "_EmissionColor", 0.25f);
+        Requested = nutrient;
+        SetEmissionColor(RequestMesh, GetNutrientConfig(nutrient).Color);
     }
 
     /** Set the required nutrient. */
     private void SetCurrent(Nutrient nutrient)
     {
-        NutrientCurrent = nutrient;
+        Current = nutrient;
+        SetEmissionColor(CurrentMesh, GetNutrientConfig(nutrient).Color);
+        SetEmissionColor(LightMesh, Current == Requested ? Color.green : Color.red);
+    }
 
-        var config = GetNutrientConfig(nutrient);
-        CurrentMesh.material = new Material(CurrentMesh.material);
-        CurrentMesh.material.EnableKeyword("_EMISSION");
-        CurrentMesh.material.DOColor(config.Color, "_EmissionColor", 0.25f);
+    private void SetEmissionColor(MeshRenderer mesh, Color color)
+    {
+        mesh.material = new Material(mesh.material);
+        mesh.material.EnableKeyword("_EMISSION");
+        mesh.material.DOColor(color, "_EmissionColor", 0.25f);
     }
 
     /** Nutrient configuration. */
