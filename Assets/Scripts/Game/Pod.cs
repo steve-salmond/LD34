@@ -32,8 +32,18 @@ public class Pod : MonoBehaviour
     /** Initialization. */
     private void Start()
     {
-        // Fire up the game control routine.
+        // Fire up the pod control routine.
         StartCoroutine(UpdateRoutine());
+    }
+
+    /** Handle objects hitting the pod. */
+    private void OnTriggerEnter(Collider other)
+    {
+        var blob = other.GetComponent<NutrientBlob>();
+        if (blob == null)
+            return;
+
+        Consume(blob);
     }
 
 
@@ -65,6 +75,22 @@ public class Pod : MonoBehaviour
     }
 
 
+    // Private Methods
+    // -----------------------------------------------------
+
+    /** Consume a nutrient blob. */
+    private void Consume(NutrientBlob blob)
+    {
+        // Add nutrients.
+        foreach (var slot in Slots)
+            if (slot.Consume(blob))
+            {
+
+            }
+
+        // Kill the blob.
+        Destroy(blob.gameObject);
+    }
 
 
 }

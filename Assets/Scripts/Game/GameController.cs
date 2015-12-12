@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
+using System.Collections.Generic;
 
 public class GameController : Singleton<GameController>
 {
@@ -36,6 +36,10 @@ public class GameController : Singleton<GameController>
     public int TotalScore
     { get; private set; }
 
+    /** Whether player is working at the moment. */
+    public bool IsWorking
+    { get { return State == GameState.Working; } }
+
 
     // Configuration
     // -----------------------------------------------------
@@ -52,6 +56,9 @@ public class GameController : Singleton<GameController>
     /** Prefab for creating new pods. */
     public Pod PodPrefab;
 
+    /** Information about nutrients. */
+    public List<NutrientConfig> Nutrients;
+
 
     // Private properties
     // -----------------------------------------------------
@@ -59,6 +66,13 @@ public class GameController : Singleton<GameController>
     /** Returns the current pod spawn timing. */
     private float PodTiming
     { get { return Mathf.RoundToInt(PodTimingCurve.Evaluate(Day)); } }
+
+
+    // Members
+    // -----------------------------------------------------
+
+    
+
 
 
     // Public Methods
@@ -74,6 +88,13 @@ public class GameController : Singleton<GameController>
         // Update score values.
         Score += value;
         TotalScore += value;
+    }
+
+    /** Nutrient configuration. */
+    public NutrientConfig GetNutrientConfig(Nutrient type)
+    {
+        // TODO: Implement
+        return Nutrients[0];
     }
 
 
