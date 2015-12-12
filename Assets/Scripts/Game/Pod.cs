@@ -12,7 +12,8 @@ public class Pod : MonoBehaviour
     // -----------------------------------------------------
 
     /** The list of slots on this pod. */
-    public List<PodSlot> Slots;
+    public List<PodSlot> Slots
+    { get; private set; }
 
     /** Delay between pod advancements. */
     public float StepTime;
@@ -41,6 +42,26 @@ public class Pod : MonoBehaviour
     /** Initialization. */
     private void Start()
     {
+        // Get game controller.
+        var controller = GameController.Instance;
+
+        // Configure the pod.
+        StepTime = controller.PodStepTime;
+
+        // Activate slots.
+        int min = controller.PodSlotCountMin;
+        int max = controller.PodSlotCountMax;
+        int count = Random.Range(min, max + 1);
+        var slots = GetComponentsInChildren<PodSlot>();
+        foreach (var slot in slots)
+        {
+            slot.gameObject.SetActive(count > 0);
+            count--;
+        }
+
+        // Get list of active slots.
+        Slots = slots.Where(slot => slot.gameObject.activeSelf).ToList();
+
         // Fire up the pod control routine.
         StartCoroutine(UpdateRoutine());
     }
@@ -107,7 +128,7 @@ public class Pod : MonoBehaviour
     private void Deliver()
     {
         // Determine if pod meets the grade.
-        var passes = Slots.Count(slot => slot.IsGood) >= 2;
+        var passes = (Slots.Count(slot => slot.IsGood) / Slots.Count) >= 0.5f;
 
         // Update game score.
         GameController.Instance.AddScore(Score);

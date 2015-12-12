@@ -124,8 +124,12 @@ public class PodSlot : MonoBehaviour
     {
         Current = nutrient;
 
+        var lightColor = IsGood ? Color.green : Color.red;
         SetEmissionColor(CurrentMesh, GetNutrientConfig(nutrient).Color);
-        SetEmissionColor(LightMesh, Current == Requested ? Color.green : Color.red);
+        SetEmissionColor(LightMesh, lightColor);
+
+        if (IsBad)
+            UIScreenFlash.Instance.Flash(lightColor);
     }
 
     private void SetEmissionColor(MeshRenderer mesh, Color color)

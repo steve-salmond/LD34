@@ -57,20 +57,34 @@ public class GameController : Singleton<GameController>
     /** Curve indicating the time-step speed of pods on a given day. */
     public AnimationCurve PodStepTimeCurve;
 
+    /** Curve indicating the minimum pod slot count on a given day. */
+    public AnimationCurve PodSlotCountMinCurve;
+
+    /** Curve indicating the maximum pod slot count on a given day. */
+    public AnimationCurve PodSlotCountMaxCurve;
+
     /** Prefab for creating new pods. */
     public Pod PodPrefab;
 
 
-    // Private properties
+    // Pod configuration properties
     // -----------------------------------------------------
 
     /** Returns the current pod spawn timing. */
-    private float PodInterval
+    public float PodInterval
     { get { return PodIntervalCurve.Evaluate(Day); } }
 
     /** Returns the current pod time-step. */
-    private float PodStepTime
+    public float PodStepTime
     { get { return PodStepTimeCurve.Evaluate(Day); } }
+
+    /** Returns the current pod time-step. */
+    public int PodSlotCountMin
+    { get { return Mathf.RoundToInt(PodSlotCountMinCurve.Evaluate(Day)); } }
+
+    /** Returns the current pod time-step. */
+    public int PodSlotCountMax
+    { get { return Mathf.RoundToInt(PodSlotCountMaxCurve.Evaluate(Day)); } }
 
 
     // Members
@@ -205,9 +219,7 @@ public class GameController : Singleton<GameController>
     {
         while (State == GameState.Working)
         {
-            var pod = Instantiate(PodPrefab);
-            pod.StepTime = PodStepTime;
-
+            Instantiate(PodPrefab);
             yield return new WaitForSeconds(PodInterval);
         }
     }
