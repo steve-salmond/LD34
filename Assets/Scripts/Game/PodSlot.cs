@@ -30,7 +30,7 @@ public class PodSlot : MonoBehaviour
     {
         // Pick a random required nutrient.
         var first = (int) Nutrient.Oxygen;
-        var last = (int) Nutrient.Sodium;
+        var last = (int) Nutrient.Hydrogen;
         var request = (Nutrient) Random.Range(first, last + 1);
         SetRequested(request);
     }

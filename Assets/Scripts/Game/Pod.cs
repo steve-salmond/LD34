@@ -84,7 +84,10 @@ public class Pod : MonoBehaviour
         // Ask each slot if it wants the nutrient.
         foreach (var slot in Slots)
             if (slot.Consume(blob))
+            {
+                transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);
                 break;
+            }
 
         // Kill the blob.
         Destroy(blob.gameObject);

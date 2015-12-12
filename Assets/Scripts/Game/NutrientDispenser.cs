@@ -18,6 +18,12 @@ public class NutrientDispenser : MonoBehaviour
     /** Location to emit from. */
     public Transform Emitter;
 
+    /** Button that controls dispensing. */
+    public string Key;
+
+    /** Blob's light mesh. */
+    public MeshRenderer LightMesh;
+
 
     // Private Properties
     // -----------------------------------------------------
@@ -33,6 +39,11 @@ public class NutrientDispenser : MonoBehaviour
     /** Initialization. */
     private void Start()
     {
+        // Set dispenser color.
+        LightMesh.material = new Material(LightMesh.material);
+        LightMesh.material.EnableKeyword("_EMISSION");
+        LightMesh.material.DOColor(NutrientConfig.Color, "_EmissionColor", 1);
+
         // Fire up the game control routine.
         StartCoroutine(UpdateRoutine());
     }
@@ -47,7 +58,7 @@ public class NutrientDispenser : MonoBehaviour
         while (true)
         {
             var working = GameController.Instance.IsWorking;
-            if (working && Input.GetKeyDown(NutrientConfig.Key))
+            if (working && Input.GetKeyDown(Key))
                 yield return StartCoroutine(Dispense());
 
             yield return 0;

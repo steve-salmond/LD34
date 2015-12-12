@@ -13,8 +13,4 @@ public class NutrientConfig : MonoBehaviour
     /** Prefab for dispensed nutrient blobs. */
     public NutrientBlob BlobPrefab;
 
-    /** Button that controls dispensing. */
-    public string Key;
-
-
 }
