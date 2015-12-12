@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using DG.Tweening;
+
 public class NutrientDispenser : MonoBehaviour
 {
 
@@ -55,6 +57,8 @@ public class NutrientDispenser : MonoBehaviour
     /** Dispense nutrients. */
     private IEnumerator Dispense()
     {
+        transform.DOPunchScale(Vector3.one * 0.1f, Cooldown);
+
         // Emit a blob of nutrients.
         var blob = Instantiate<NutrientBlob>(NutrientConfig.BlobPrefab);
         blob.transform.position = Emitter.position;
