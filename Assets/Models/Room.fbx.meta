@@ -10,25 +10,45 @@ ModelImporter:
     100004: Room
     100006: SquareTIles
     100008: LightPanels
+    100010: BezierCircle
+    100012: Room_ShowLights
+    100014: AlarmLight
+    100016: Button
     400000: //RootNode
     400002: HexTiles
     400004: Room
     400006: SquareTIles
     400008: LightPanels
+    400010: BezierCircle
+    400012: Room_ShowLights
+    400014: AlarmLight
+    400016: Button
     2300000: //RootNode
     2300002: HexTiles
     2300004: Room
     2300006: SquareTIles
     2300008: LightPanels
+    2300010: BezierCircle
+    2300012: Room_ShowLights
+    2300014: AlarmLight
+    2300016: Button
     3300000: //RootNode
     3300002: HexTiles
     3300004: Room
     3300006: SquareTIles
     3300008: LightPanels
+    3300010: BezierCircle
+    3300012: Room_ShowLights
+    3300014: AlarmLight
+    3300016: Button
     4300000: Room
     4300002: HexTiles
     4300004: SquareTIles
     4300006: LightPanels
+    4300008: BezierCircle
+    4300010: Room_ShowLights
+    4300012: AlarmLight
+    4300014: Button
   materials:
     importMaterials: 1
     materialName: 0
