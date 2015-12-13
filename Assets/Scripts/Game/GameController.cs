@@ -65,6 +65,9 @@ public class GameController : Singleton<GameController>
     // Configuration
     // -----------------------------------------------------
 
+    /** Maximum number of days in a game. */
+    public int MaxDays;
+
     /** Curve indicating the initial time allocated on a given day. */
     public AnimationCurve PodTotalCurve;
 
@@ -93,21 +96,25 @@ public class GameController : Singleton<GameController>
     // Pod configuration properties
     // -----------------------------------------------------
 
+    /** Current game day progress fraction. */
+    public float DayFraction
+    { get { return (float) (Day - 1) / (MaxDays - 1); } }
+
     /** Returns the current pod spawn timing. */
     public float PodInterval
-    { get { return PodIntervalCurve.Evaluate(Day); } }
+    { get { return PodIntervalCurve.Evaluate(DayFraction); } }
 
     /** Returns the current pod time-step. */
     public float PodStepTime
-    { get { return PodStepTimeCurve.Evaluate(Day); } }
+    { get { return PodStepTimeCurve.Evaluate(DayFraction); } }
 
     /** Returns the current pod time-step. */
     public int PodSlotCountMin
-    { get { return Mathf.RoundToInt(PodSlotCountMinCurve.Evaluate(Day)); } }
+    { get { return Mathf.RoundToInt(PodSlotCountMinCurve.Evaluate(DayFraction)); } }
 
     /** Returns the current pod time-step. */
     public int PodSlotCountMax
-    { get { return Mathf.RoundToInt(PodSlotCountMaxCurve.Evaluate(Day)); } }
+    { get { return Mathf.RoundToInt(PodSlotCountMaxCurve.Evaluate(DayFraction)); } }
 
 
     // Members
@@ -138,6 +145,10 @@ public class GameController : Singleton<GameController>
     /** Complete work for the day. */
     public void EveningCompleted()
     { SetState(GameState.Morning); }
+
+    /** Game over screen completed. */
+    public void GameOverCompleted()
+    { SetState(GameState.Intro); }
 
     /** Adds some score to the game. */
     public void Deliver(Pod pod)
@@ -181,14 +192,6 @@ public class GameController : Singleton<GameController>
     // Unity Implementation
     // -----------------------------------------------------
 
-    /** Pre-initialization. */
-    private void Awake()
-    {
-        // Reset the current day.
-        Day = 0;
-
-    }
-
     /** Initialization. */
     private void Start()
     {
@@ -203,6 +206,12 @@ public class GameController : Singleton<GameController>
     /** Update the game. */
     private IEnumerator GameRoutine()
     {
+        // Reset game state.
+        Day = 0;
+        UserName = "";
+        Score = 0;
+        TotalScore = 0;
+
         // First, play intro.
         yield return StartCoroutine(IntroRoutine());
 
@@ -249,16 +258,13 @@ public class GameController : Singleton<GameController>
         PodCount = 0;
         PodGoodCount = 0;
         PodBadCount = 0;
-        PodTotalCount = Mathf.RoundToInt(PodTotalCurve.Evaluate(Day));
+        PodTotalCount = Mathf.RoundToInt(PodTotalCurve.Evaluate(DayFraction));
         PodsToDeliver = PodTotalCount;
-        PodQuota = Mathf.RoundToInt(PodQuotaCurve.Evaluate(Day));
+        PodQuota = Mathf.RoundToInt(PodQuotaCurve.Evaluate(DayFraction));
 
         // Wait till player completes briefing.
         while (State == GameState.Morning)
             yield return 0;
-
-        // Delay a bit after morning is over.
-        yield return new WaitForSeconds(1);
     }
 
     /** Handle a day's shift. */
@@ -278,7 +284,7 @@ public class GameController : Singleton<GameController>
             yield return 0;
 
         // Wait a bit for final pod delivery
-        yield return new WaitForSeconds(PodInterval * 2);
+        yield return new WaitForSeconds(0.5f);
     }
 
     /** Handle the end of a day's shift. */
@@ -309,10 +315,6 @@ public class GameController : Singleton<GameController>
             // Wait till player completes evening briefing.
             while (State == GameState.Evening)
                 yield return 0;
-
-            // Delay a bit after morning is over.
-            yield return new WaitForSeconds(1);
-
         }
 
         yield return 0;
@@ -327,8 +329,12 @@ public class GameController : Singleton<GameController>
         CameraController.Instance.LookAtMonitor();
         MenuController.Instance.ShowGameOverScreen();
 
-        yield return new WaitForSeconds(5);
-        yield return 0;
+        // Wait till player completes game over.
+        while (State == GameState.GameOver)
+            yield return 0;
+
+        // Start a new game.
+        StartCoroutine(GameRoutine());
     }
 
 

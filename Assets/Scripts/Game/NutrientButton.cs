@@ -46,8 +46,8 @@ public class NutrientButton : MonoBehaviour
         transform.DOPunchScale(Vector3.one * 0.1f, cooldown);
         
         DOTween.Sequence()
-            .Append(Mesh.material.DOColor(Dispenser.NutrientConfig.OnColor, cooldown))
-            .Append(Mesh.material.DOColor(Dispenser.NutrientConfig.OffColor, cooldown));
+            .Append(Mesh.material.DOColor(Dispenser.NutrientConfig.OnColor, cooldown * 0.25f))
+            .Append(Mesh.material.DOColor(Dispenser.NutrientConfig.OffColor, cooldown * 0.25f));
     }
 
 

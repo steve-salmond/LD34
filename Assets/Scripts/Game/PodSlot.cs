@@ -116,7 +116,7 @@ public class PodSlot : MonoBehaviour
     private void SetRequested(Nutrient nutrient)
     {
         Requested = nutrient;
-        SetEmissionColor(RequestMesh, GetNutrientConfig(nutrient).OffColor);
+        SetEmissionColor(RequestMesh, GetNutrientConfig(nutrient).OnColor);
     }
 
     /** Set the required nutrient. */

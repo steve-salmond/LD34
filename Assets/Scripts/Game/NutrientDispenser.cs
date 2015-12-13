@@ -105,8 +105,8 @@ public class NutrientDispenser : MonoBehaviour
 
         // Animate color.
         DOTween.Sequence()
-            .Append(LightMesh.material.DOColor(NutrientConfig.OnColor, Cooldown))
-            .Append(LightMesh.material.DOColor(NutrientConfig.OffColor, Cooldown));
+            .Append(LightMesh.material.DOColor(NutrientConfig.OnColor, Cooldown * 0.25f))
+            .Append(LightMesh.material.DOColor(NutrientConfig.OffColor, Cooldown * 0.25f));
 
         // Emit a blob of nutrients.
         var blob = Instantiate<NutrientBlob>(NutrientConfig.BlobPrefab);

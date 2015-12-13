@@ -22,7 +22,10 @@ public class MenuController : Singleton<MenuController>
     private void Awake()
     {
         Login.gameObject.SetActive(false);
+        Morning.gameObject.SetActive(false);
         Working.gameObject.SetActive(false);
+        Evening.gameObject.SetActive(false);
+        GameOver.gameObject.SetActive(false);
     }
 
     public void ShowLoginScreen()
