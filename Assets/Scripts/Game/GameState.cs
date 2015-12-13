@@ -8,6 +8,5 @@ public enum GameState
     Morning,
     Working,
     Evening,
-    GameOver,
-    Victory
+    GameOver
 }

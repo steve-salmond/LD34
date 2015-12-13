@@ -61,6 +61,10 @@ public class GameController : Singleton<GameController>
     public bool IsWorking
     { get { return State == GameState.Working; } }
 
+    /** Whether player is working at the moment. */
+    public bool IsPlaying
+    { get { return State != GameState.GameOver; } }
+
 
     // Configuration
     // -----------------------------------------------------
@@ -228,7 +232,7 @@ public class GameController : Singleton<GameController>
         yield return StartCoroutine(WelcomeRoutine());
 
         // Then, enter the daily grind.
-        while (State != GameState.GameOver)
+        while (IsPlaying)
         {
             yield return StartCoroutine(MorningRoutine());
             yield return StartCoroutine(WorkRoutine());
@@ -329,9 +333,15 @@ public class GameController : Singleton<GameController>
 
         // Check if player has failed to meet today's pod quota.
         if (PodGoodCount < PodQuota)
+        {
+            SetState(GameState.GameOver);
             yield return StartCoroutine(GameOverRoutine());
+        }
         else if (Day == MaxDays)
+        {
+            SetState(GameState.GameOver);
             yield return StartCoroutine(VictoryRoutine());
+        }
         else
         {
             // Wait till player completes evening briefing.
@@ -347,8 +357,6 @@ public class GameController : Singleton<GameController>
     /** Handle the game over condition. */
     private IEnumerator GameOverRoutine()
     {
-        SetState(GameState.GameOver);
-
         // Look at monitor.
         CameraController.Instance.LookAtMonitor();
         MenuController.Instance.ShowGameOverScreen();
@@ -364,14 +372,12 @@ public class GameController : Singleton<GameController>
     /** Handle victory condition. */
     private IEnumerator VictoryRoutine()
     {
-        SetState(GameState.Victory);
-
         // Look at monitor.
         CameraController.Instance.LookAtMonitor();
         MenuController.Instance.ShowVictoryScreen();
 
         // Wait till player completes game over.
-        while (State == GameState.Victory)
+        while (State == GameState.GameOver)
             yield return 0;
 
         // Start a new game.
