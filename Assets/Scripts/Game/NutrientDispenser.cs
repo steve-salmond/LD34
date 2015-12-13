@@ -24,17 +24,32 @@ public class NutrientDispenser : MonoBehaviour
     /** Blob's light mesh. */
     public MeshRenderer LightMesh;
 
+    /** Nutrient button. */
+    public NutrientButton Button;
+
     /** Whether nutrient is being dispensed. */
     public bool Dispensing
     { get; private set; }
 
-    // Private Properties
-    // -----------------------------------------------------
-
     /** Nutrient configuration. */
-    private NutrientConfig NutrientConfig
+    public NutrientConfig NutrientConfig
     { get { return GameController.Instance.GetNutrientConfig(Nutrient); } }
 
+
+
+    // Public Methods
+    // -----------------------------------------------------
+
+    /** Attempt to dispense. */
+    public bool Use()
+    {
+        var working = GameController.Instance.IsWorking;
+        var canUse = working && !Dispensing;
+        if (canUse)
+            StartCoroutine(Dispense());
+
+        return canUse;
+    }
 
 
     // Unity Implementation
@@ -48,17 +63,17 @@ public class NutrientDispenser : MonoBehaviour
         LightMesh.material.EnableKeyword("_EMISSION");
         LightMesh.material.DOColor(NutrientConfig.Color, "_EmissionColor", 1);
 
+        // Configure button.
+        if (Button)
+            Button.SetDispenser(this);
+
         // Fire up the game control routine.
         StartCoroutine(UpdateRoutine());
     }
 
     /** Dispense when player clicks on dispenser. */
     void OnMouseDown()
-    {
-        var working = GameController.Instance.IsWorking;
-        if (working && !Dispensing)
-            StartCoroutine(Dispense());
-    }
+        { Use(); }
 
 
     // Coroutines
@@ -82,6 +97,11 @@ public class NutrientDispenser : MonoBehaviour
     {
         Dispensing = true;
 
+        // Press the button.
+        if (Button)
+            Button.Pressed();
+
+        // Animate dispenser.
         transform.DOPunchScale(Vector3.one * 0.1f, Cooldown);
 
         // Emit a blob of nutrients.
