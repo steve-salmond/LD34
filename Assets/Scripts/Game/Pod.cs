@@ -30,14 +30,29 @@ public class Pod : MonoBehaviour
     /** Pod capsule. */
     public Transform Capsule;
 
+    /** Fetus growth stage. */
+    public Transform Fetus;
+
+    /** Baby growth stage. */
+    public Transform Baby;
+
+    /** Child growth stage. */
+    public Transform Child;
+
+    /** Adult growth stage. */
+    public Transform Adult;
+
     /** Return the current score for this pod. */
     public int Score
     { get { return Slots.Sum(slot => slot.Score); } }
 
     /** Return whether pod is acceptable for delivery. */
     public bool IsGood
-    { get { return (Slots.Count(slot => slot.IsGood) / Slots.Count) >= 0.5f; } }
+    { get { return Growth >= 0.5f; } }
 
+    /** Get the pod's growth fraction. */
+    public float Growth
+    { get { return (Slots.Count(slot => slot.IsGood) / Slots.Count); } }
 
 
     // Unity Implementation
@@ -65,6 +80,9 @@ public class Pod : MonoBehaviour
 
         // Get list of active slots.
         Slots = slots.Where(slot => slot.gameObject.activeSelf).ToList();
+
+        // Start out with zero growth.
+        SetGrowth(0);
 
         // Fire up the pod control routine.
         StartCoroutine(UpdateRoutine());
@@ -121,7 +139,7 @@ public class Pod : MonoBehaviour
         foreach (var slot in Slots)
             if (slot.Consume(blob))
             {
-                transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);
+                UpdateGrowth();
                 break;
             }
 
@@ -146,5 +164,41 @@ public class Pod : MonoBehaviour
 
     }
 
+    /** Update the growth stage. */
+    private void UpdateGrowth()
+    {
+        // Shake the pod a bit.
+        transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);
+
+        // Set the new growth fraction.
+        SetGrowth(Growth);
+    }
+
+    /** Set the growth stage value. */
+    private void SetGrowth(float value)
+    {
+        Fetus.gameObject.SetActive(false);
+        Baby.gameObject.SetActive(false);
+        Child.gameObject.SetActive(false);
+        Adult.gameObject.SetActive(false);
+
+        if (value < 0.25f)
+        {
+            Fetus.gameObject.SetActive(true);
+        }
+        else if (value < 0.5f)
+        {
+            Baby.gameObject.SetActive(true);
+        }
+        else if (value < 0.75f)
+        {
+            Child.gameObject.SetActive(true);
+        }
+        else
+        {
+            Adult.gameObject.SetActive(true);
+        }
+
+    }
 
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Flicker : MonoBehaviour
+public class UIFlicker : MonoBehaviour
 {
     public Vector2 AlphaRange;
 
