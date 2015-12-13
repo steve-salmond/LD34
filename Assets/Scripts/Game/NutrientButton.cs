@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 using DG.Tweening;
@@ -21,6 +22,10 @@ public class NutrientButton : MonoBehaviour
     /** Blob's light mesh. */
     public MeshRenderer Mesh;
 
+    /** Buttons' label. */
+    public Text Label
+    { get; private set; }
+
 
     // Methods
     // -----------------------------------------------------
@@ -30,6 +35,9 @@ public class NutrientButton : MonoBehaviour
     {
         Dispenser = dispenser;
         Nutrient = Dispenser.NutrientConfig.Type;
+
+        Label = GetComponentInChildren<Text>();
+        Label.text = Dispenser.Key;
 
         // Set dispenser color.
         Mesh.material = new Material(Mesh.material);
