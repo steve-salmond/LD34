@@ -30,6 +30,9 @@ public class Pod : MonoBehaviour
     /** Pod capsule. */
     public Transform Capsule;
 
+    /** Overall human display. */
+    public Transform Human;
+
     /** Fetus growth stage. */
     public Transform Fetus;
 
@@ -177,6 +180,9 @@ public class Pod : MonoBehaviour
     {
         // Shake the pod a bit.
         transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);
+
+        // Shake the human as it grows.
+        Human.DOPunchScale(new Vector3(0.5f, 0, 0.5f), 1.5f, 5);
 
         // Set the new growth fraction.
         var old = GrowthTarget;
