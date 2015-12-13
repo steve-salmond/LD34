@@ -19,7 +19,7 @@ public class MenuWorking : MonoBehaviour
         var total = GameController.Instance.PodTotalCount;
 
         Title.text = string.Format("SHIFT {0} of {1}", day, days);
-        Quota.text = string.Format("TODAY'S QUOTA - {0} of {1}", quota, total);
+        Quota.text = string.Format("TODAY'S QUOTA - {0}", quota, total);
     }
 
     void Update()

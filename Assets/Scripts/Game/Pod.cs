@@ -54,7 +54,7 @@ public class Pod : MonoBehaviour
 
     /** Return whether pod is acceptable for delivery. */
     public bool IsGood
-    { get { return Growth >= 0.5f; } }
+    { get { return Growth >= 1; } }
 
     /** Get the pod's growth fraction. */
     public float Growth
