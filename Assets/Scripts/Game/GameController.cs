@@ -131,6 +131,14 @@ public class GameController : Singleton<GameController>
         UserName = name;
     }
 
+    /** Start work for the day. */
+    public void MorningCompleted()
+    { SetState(GameState.Working); }
+
+    /** Complete work for the day. */
+    public void EveningCompleted()
+    { SetState(GameState.Morning); }
+
     /** Adds some score to the game. */
     public void Deliver(Pod pod)
     {
@@ -234,6 +242,7 @@ public class GameController : Singleton<GameController>
 
         // Look at monitor.
         CameraController.Instance.LookAtMonitor();
+        MenuController.Instance.ShowMorningScreen();
 
         // Set up today's shift.
         Day = Day + 1;
@@ -244,6 +253,11 @@ public class GameController : Singleton<GameController>
         PodsToDeliver = PodTotalCount;
         PodQuota = Mathf.RoundToInt(PodQuotaCurve.Evaluate(Day));
 
+        // Wait till player completes briefing.
+        while (State == GameState.Morning)
+            yield return 0;
+
+        // Delay a bit after morning is over.
         yield return new WaitForSeconds(1);
     }
 
@@ -285,12 +299,21 @@ public class GameController : Singleton<GameController>
 
         // Look at monitor.
         CameraController.Instance.LookAtMonitor();
+        MenuController.Instance.ShowEveningScreen();
 
         // Check if player has failed to meet today's pod quota.
         if (PodGoodCount < PodQuota)
             SetState(GameState.GameOver);
         else
-            yield return new WaitForSeconds(5);
+        {
+            // Wait till player completes evening briefing.
+            while (State == GameState.Evening)
+                yield return 0;
+
+            // Delay a bit after morning is over.
+            yield return new WaitForSeconds(1);
+
+        }
 
         yield return 0;
     }
@@ -302,6 +325,7 @@ public class GameController : Singleton<GameController>
 
         // Look at monitor.
         CameraController.Instance.LookAtMonitor();
+        MenuController.Instance.ShowGameOverScreen();
 
         yield return new WaitForSeconds(5);
         yield return 0;

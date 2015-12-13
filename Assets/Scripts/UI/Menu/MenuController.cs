@@ -8,7 +8,10 @@ public class MenuController : Singleton<MenuController>
 {
 
     public CanvasGroup Login;
+    public CanvasGroup Morning;
     public CanvasGroup Working;
+    public CanvasGroup Evening;
+    public CanvasGroup GameOver;
 
     public CanvasGroup Current
     { get; private set; }
@@ -18,9 +21,6 @@ public class MenuController : Singleton<MenuController>
 
     private void Awake()
     {
-        Login.alpha = 0;
-        Working.alpha = 0;
-
         Login.gameObject.SetActive(false);
         Working.gameObject.SetActive(false);
     }
@@ -28,26 +28,32 @@ public class MenuController : Singleton<MenuController>
     public void ShowLoginScreen()
     { SetScreen(Login); }
 
+    public void ShowMorningScreen()
+    { SetScreen(Morning); }
+
     public void ShowWorkingScreen()
     { SetScreen(Working); }
+
+    public void ShowEveningScreen()
+    { SetScreen(Evening); }
+
+    public void ShowGameOverScreen()
+    { SetScreen(GameOver); }
 
     private void SetScreen(CanvasGroup screen)
     {
         if (Current == screen)
             return;
 
-        var sequence = DOTween.Sequence();
         if (Current != null)
-        {
-            var old = Current;
-            sequence.Append(old.DOFade(0, 1));
-            sequence.OnComplete(() => old.gameObject.SetActive(false));
-        }
+            Current.gameObject.SetActive(false);
 
         Current = screen;
         Current.gameObject.SetActive(true);
-
-        sequence.Append(Current.DOFade(1, 1));
+        Current.DOFade(0, 1.0f).From();
+        Current.transform.DOScale(Vector3.one * 0.95f, 0.5f)
+            .From()
+            .SetEase(Ease.OutBounce);
     }
 
 
