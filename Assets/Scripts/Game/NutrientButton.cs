@@ -33,15 +33,21 @@ public class NutrientButton : MonoBehaviour
 
         // Set dispenser color.
         Mesh.material = new Material(Mesh.material);
-        Mesh.material.EnableKeyword("_EMISSION");
-        Mesh.material.DOColor(Dispenser.NutrientConfig.Color, "_EmissionColor", 1);
+        Mesh.material.DOColor(Dispenser.NutrientConfig.OffColor, 1);
     }
 
     /** Presses this button. */
     public void Pressed()
     {
-        if (Dispenser)
-            transform.DOPunchScale(Vector3.one * 0.1f, Dispenser.Cooldown);
+        if (!Dispenser)
+            return;
+
+        var cooldown = Dispenser.Cooldown;
+        transform.DOPunchScale(Vector3.one * 0.1f, cooldown);
+        
+        DOTween.Sequence()
+            .Append(Mesh.material.DOColor(Dispenser.NutrientConfig.OnColor, cooldown))
+            .Append(Mesh.material.DOColor(Dispenser.NutrientConfig.OffColor, cooldown));
     }
 
 

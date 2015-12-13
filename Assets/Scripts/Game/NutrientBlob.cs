@@ -29,8 +29,7 @@ public class NutrientBlob : MonoBehaviour
         var config = GetNutrientConfig(Nutrient);
 
         Mesh.material = new Material(Mesh.material);
-        Mesh.material.EnableKeyword("_EMISSION");
-        Mesh.material.DOColor(config.Color, "_EmissionColor", 1);
+        Mesh.material.DOColor(config.OnColor, 1);
     }
 
 

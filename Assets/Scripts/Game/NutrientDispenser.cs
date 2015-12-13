@@ -60,8 +60,7 @@ public class NutrientDispenser : MonoBehaviour
     {
         // Set dispenser color.
         LightMesh.material = new Material(LightMesh.material);
-        LightMesh.material.EnableKeyword("_EMISSION");
-        LightMesh.material.DOColor(NutrientConfig.Color, "_EmissionColor", 1);
+        LightMesh.material.DOColor(NutrientConfig.OffColor, 1);
 
         // Configure button.
         if (Button)
@@ -103,6 +102,11 @@ public class NutrientDispenser : MonoBehaviour
 
         // Animate dispenser.
         transform.DOPunchScale(Vector3.one * 0.1f, Cooldown);
+
+        // Animate color.
+        DOTween.Sequence()
+            .Append(LightMesh.material.DOColor(NutrientConfig.OnColor, Cooldown))
+            .Append(LightMesh.material.DOColor(NutrientConfig.OffColor, Cooldown));
 
         // Emit a blob of nutrients.
         var blob = Instantiate<NutrientBlob>(NutrientConfig.BlobPrefab);

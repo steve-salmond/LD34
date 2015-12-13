@@ -116,7 +116,7 @@ public class PodSlot : MonoBehaviour
     private void SetRequested(Nutrient nutrient)
     {
         Requested = nutrient;
-        SetEmissionColor(RequestMesh, GetNutrientConfig(nutrient).Color);
+        SetEmissionColor(RequestMesh, GetNutrientConfig(nutrient).OffColor);
     }
 
     /** Set the required nutrient. */
@@ -125,7 +125,7 @@ public class PodSlot : MonoBehaviour
         Current = nutrient;
 
         var lightColor = IsGood ? Color.green : Color.red;
-        SetEmissionColor(CurrentMesh, GetNutrientConfig(nutrient).Color);
+        SetEmissionColor(CurrentMesh, GetNutrientConfig(nutrient).OnColor);
         SetEmissionColor(LightMesh, lightColor);
 
         if (IsBad)
@@ -135,8 +135,7 @@ public class PodSlot : MonoBehaviour
     private void SetEmissionColor(MeshRenderer mesh, Color color)
     {
         mesh.material = new Material(mesh.material);
-        mesh.material.EnableKeyword("_EMISSION");
-        mesh.material.DOColor(color, "_EmissionColor", 0.25f);
+        mesh.material.DOColor(color, 0.25f);
     }
 
     /** Nutrient configuration. */
