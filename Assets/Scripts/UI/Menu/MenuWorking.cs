@@ -7,11 +7,23 @@ using DG.Tweening;
 
 public class MenuWorking : MonoBehaviour
 {
-    public Text User;
+    public Text Title;
+    public Text Delivered;
+    public Text Quota;
 
     void OnEnable()
     {
-        var name = GameController.Instance.UserName;
-        User.text = string.Format("{0}", name);
+        var day = GameController.Instance.Day;
+        var days = GameController.Instance.MaxDays;
+        var quota = GameController.Instance.PodQuota;
+
+        Title.text = string.Format("SHIFT {0} of {1}", day, days);
+        Quota.text = string.Format("TODAY'S QUOTA - {0}", quota);
+    }
+
+    void Update()
+    {
+        var viable = GameController.Instance.PodGoodCount;
+        Delivered.text = string.Format("VIABLE SPECIMENS - {0}", viable);
     }
 }

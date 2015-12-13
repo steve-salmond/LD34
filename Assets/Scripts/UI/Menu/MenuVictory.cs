@@ -5,12 +5,12 @@ using System.Collections;
 using DG.Tweening;
 
 
-public class MenuGameOver : MonoBehaviour
+public class MenuVictory : MonoBehaviour
 {
 
     public void OnOK()
     {
-        GameController.Instance.GameOverCompleted();
+        GameController.Instance.VictoryCompleted();
     }
 
 }

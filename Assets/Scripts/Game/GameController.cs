@@ -138,6 +138,10 @@ public class GameController : Singleton<GameController>
         UserName = name;
     }
 
+    /** Welcome screen completed. */
+    public void WelcomeCompleted()
+    { SetState(GameState.Morning); }
+
     /** Start work for the day. */
     public void MorningCompleted()
     { SetState(GameState.Working); }
@@ -149,6 +153,11 @@ public class GameController : Singleton<GameController>
     /** Game over screen completed. */
     public void GameOverCompleted()
     { SetState(GameState.Intro); }
+
+    /** Victory screen completed. */
+    public void VictoryCompleted()
+    { SetState(GameState.Intro); }
+
 
     /** Adds some score to the game. */
     public void Deliver(Pod pod)
@@ -215,6 +224,9 @@ public class GameController : Singleton<GameController>
         // First, play intro.
         yield return StartCoroutine(IntroRoutine());
 
+        // Then, show welcome screen.
+        yield return StartCoroutine(WelcomeRoutine());
+
         // Then, enter the daily grind.
         while (State != GameState.GameOver)
         {
@@ -222,9 +234,6 @@ public class GameController : Singleton<GameController>
             yield return StartCoroutine(WorkRoutine());
             yield return StartCoroutine(EveningRoutine());
         }
-
-        // Eventually the game ends.
-        yield return StartCoroutine(GameOverRoutine());
     }
 
     /** Play the game intro. */
@@ -241,17 +250,24 @@ public class GameController : Singleton<GameController>
             yield return 0;
 
         // Delay a bit after login.
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+    }
+
+    /** Show the welcome screen. */
+    private IEnumerator WelcomeRoutine()
+    {
+        // Show welcome screen.
+        MenuController.Instance.ShowWelcomeScreen();
+
+        // Wait till player completes welcome screen.
+        while (State == GameState.Intro)
+            yield return 0;
     }
 
     /** Handle the morning before a day's shift. */
     private IEnumerator MorningRoutine()
     {
         SetState(GameState.Morning);
-
-        // Look at monitor.
-        CameraController.Instance.LookAtMonitor();
-        MenuController.Instance.ShowMorningScreen();
 
         // Set up today's shift.
         Day = Day + 1;
@@ -261,6 +277,10 @@ public class GameController : Singleton<GameController>
         PodTotalCount = Mathf.RoundToInt(PodTotalCurve.Evaluate(DayFraction));
         PodsToDeliver = PodTotalCount;
         PodQuota = Mathf.RoundToInt(PodQuotaCurve.Evaluate(DayFraction));
+
+        // Look at monitor.
+        CameraController.Instance.LookAtMonitor();
+        MenuController.Instance.ShowMorningScreen();
 
         // Wait till player completes briefing.
         while (State == GameState.Morning)
@@ -309,18 +329,22 @@ public class GameController : Singleton<GameController>
 
         // Check if player has failed to meet today's pod quota.
         if (PodGoodCount < PodQuota)
-            SetState(GameState.GameOver);
+            yield return StartCoroutine(GameOverRoutine());
+        else if (Day == MaxDays)
+            yield return StartCoroutine(VictoryRoutine());
         else
         {
             // Wait till player completes evening briefing.
             while (State == GameState.Evening)
                 yield return 0;
-        }
 
-        yield return 0;
+            // Indicate that one night has passed.
+            UIScreenFlash.Instance.Flash(Color.black, 1, 1);
+            yield return new WaitForSeconds(1);
+        }
     }
 
-    /** Handle the end of the game. */
+    /** Handle the game over condition. */
     private IEnumerator GameOverRoutine()
     {
         SetState(GameState.GameOver);
@@ -331,6 +355,23 @@ public class GameController : Singleton<GameController>
 
         // Wait till player completes game over.
         while (State == GameState.GameOver)
+            yield return 0;
+
+        // Start a new game.
+        StartCoroutine(GameRoutine());
+    }
+
+    /** Handle victory condition. */
+    private IEnumerator VictoryRoutine()
+    {
+        SetState(GameState.Victory);
+
+        // Look at monitor.
+        CameraController.Instance.LookAtMonitor();
+        MenuController.Instance.ShowVictoryScreen();
+
+        // Wait till player completes game over.
+        while (State == GameState.Victory)
             yield return 0;
 
         // Start a new game.

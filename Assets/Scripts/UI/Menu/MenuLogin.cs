@@ -31,7 +31,7 @@ public class MenuLogin : MonoBehaviour
             Message.text = "<color=#ff0000>Invalid username!</color>";
         else
         {
-            Message.text = string.Format("Welcome, {0}!", name);
+            Message.text = "logging in...";
             GameController.Instance.Login(name);
         }
     }

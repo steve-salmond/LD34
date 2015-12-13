@@ -8,10 +8,12 @@ public class MenuController : Singleton<MenuController>
 {
 
     public CanvasGroup Login;
+    public CanvasGroup Welcome;
     public CanvasGroup Morning;
     public CanvasGroup Working;
     public CanvasGroup Evening;
     public CanvasGroup GameOver;
+    public CanvasGroup Victory;
 
     public CanvasGroup Current
     { get; private set; }
@@ -22,14 +24,19 @@ public class MenuController : Singleton<MenuController>
     private void Awake()
     {
         Login.gameObject.SetActive(false);
+        Welcome.gameObject.SetActive(false);
         Morning.gameObject.SetActive(false);
         Working.gameObject.SetActive(false);
         Evening.gameObject.SetActive(false);
         GameOver.gameObject.SetActive(false);
+        Victory.gameObject.SetActive(false);
     }
 
     public void ShowLoginScreen()
     { SetScreen(Login); }
+
+    public void ShowWelcomeScreen()
+    { SetScreen(Welcome); }
 
     public void ShowMorningScreen()
     { SetScreen(Morning); }
@@ -42,6 +49,9 @@ public class MenuController : Singleton<MenuController>
 
     public void ShowGameOverScreen()
     { SetScreen(GameOver); }
+
+    public void ShowVictoryScreen()
+    { SetScreen(Victory); }
 
     private void SetScreen(CanvasGroup screen)
     {
