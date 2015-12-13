@@ -12,6 +12,12 @@ public class NutrientBlob : MonoBehaviour
     /** Blob's material. */
     public MeshRenderer Mesh;
 
+    /** Blob's light. */
+    public Light Light;
+
+    /** Blob's trail. */
+    public ParticleSystem Trail;
+
 
     // Unity Implementation
     // -----------------------------------------------------
@@ -22,7 +28,7 @@ public class NutrientBlob : MonoBehaviour
         // Animate blob.
         transform.DOScale(0, 0.25f).From()
             .SetEase(Ease.InOutBounce);
-        transform.DOMoveY(0, 1)
+        transform.DOMoveY(-5, 1.5f)
             .SetEase(Ease.InQuad)
             .OnComplete(Cleanup);
 
@@ -31,6 +37,9 @@ public class NutrientBlob : MonoBehaviour
         Mesh.material = new Material(Mesh.material);
         Mesh.material.EnableKeyword("_EMISSION");
         Mesh.material.DOColor(config.OnColor, "_EmissionColor", 1);
+
+        Trail.startColor = config.OnColor;
+        Light.DOColor(config.OnColor, 0.5f);
     }
 
 

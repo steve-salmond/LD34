@@ -63,6 +63,10 @@ public class PodSlot : MonoBehaviour
         }
     }
 
+    /** Return the current slot color. */
+    public Color Color
+    { get { return GetNutrientConfig(Current).OnColor; } }
+
 
     // Unity Implementation
     // -----------------------------------------------------
@@ -127,8 +131,11 @@ public class PodSlot : MonoBehaviour
     {
         Current = nutrient;
 
-        SetEmissionColor(RequestMesh, GetNutrientConfig(Requested).OffColor, 0.5f);
-        SetEmissionColor(CurrentMesh, GetNutrientConfig(Current).OffColor, 0.5f);
+        RequestMesh.enabled = false;
+        CurrentMesh.enabled = false;
+
+        // SetEmissionColor(RequestMesh, GetNutrientConfig(Requested).OffColor, 0.5f);
+        // SetEmissionColor(CurrentMesh, GetNutrientConfig(Current).OffColor, 0.5f);
 
         var lightColor = IsGood ? Color.green : Color.red;
         SetEmissionColor(LightMesh, lightColor);
@@ -139,7 +146,7 @@ public class PodSlot : MonoBehaviour
     private void SetEmissionColor(MeshRenderer mesh, Color c, float a = 1)
     {
         mesh.material = new Material(mesh.material);
-        mesh.material.DOColor(new Color(c.r * a, c.g * a, c.b * a, a), 0.25f);
+        mesh.material.DOColor(new Color(c.r * a, c.g * a, c.b * a, a), 0.5f);
     }
 
     /** Nutrient configuration. */
