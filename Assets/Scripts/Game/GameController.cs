@@ -123,6 +123,11 @@ public class GameController : Singleton<GameController>
     /** Login to the game. */
     public void Login(string name)
     {
+        // Check if already logged in.
+        if (LoggedIn)
+            return;
+
+        // Set player's user name.
         UserName = name;
     }
 
