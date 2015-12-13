@@ -162,11 +162,11 @@ public class GameController : Singleton<GameController>
 
     /** Game over screen completed. */
     public void GameOverCompleted()
-    { SetState(GameState.Intro); }
+    { SetState(GameState.None); }
 
     /** Victory screen completed. */
     public void VictoryCompleted()
-    { SetState(GameState.Intro); }
+    { SetState(GameState.None); }
 
 
     /** Deliver a pod. */
@@ -231,6 +231,7 @@ public class GameController : Singleton<GameController>
     private IEnumerator GameRoutine()
     {
         // Reset game state.
+        SetState(GameState.None);
         Day = 0;
         UserName = "";
         Score = 0;
@@ -249,6 +250,12 @@ public class GameController : Singleton<GameController>
             yield return StartCoroutine(WorkRoutine());
             yield return StartCoroutine(EveningRoutine());
         }
+
+        // Eventually the game completes.
+        if (Day >= MaxDays)
+            yield return StartCoroutine(VictoryRoutine());
+        else
+            yield return StartCoroutine(GameOverRoutine());
     }
 
     /** Play the game intro. */
@@ -345,15 +352,9 @@ public class GameController : Singleton<GameController>
 
         // Check if player has failed to meet today's pod quota.
         if (PodGoodCount < PodQuota)
-        {
             SetState(GameState.GameOver);
-            yield return StartCoroutine(GameOverRoutine());
-        }
         else if (Day == MaxDays)
-        {
             SetState(GameState.GameOver);
-            yield return StartCoroutine(VictoryRoutine());
-        }
         else
         {
             // Wait till player completes evening briefing.
