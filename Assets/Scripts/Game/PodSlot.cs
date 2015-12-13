@@ -139,8 +139,9 @@ public class PodSlot : MonoBehaviour
 
         var lightColor = IsGood ? Color.green : Color.red;
         SetEmissionColor(LightMesh, lightColor);
-        if (IsBad)
-            UIScreenFlash.Instance.Flash(lightColor);
+        
+        // if (IsBad)
+        //    UIScreenFlash.Instance.Flash(lightColor);
     }
 
     private void SetEmissionColor(MeshRenderer mesh, Color c, float a = 1)

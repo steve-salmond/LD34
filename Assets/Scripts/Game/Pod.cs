@@ -213,7 +213,7 @@ public class Pod : MonoBehaviour
             Water.material = new Material(Water.material);
             Water.material.EnableKeyword("_EMISSION");
             Water.material.DOColor(c, "_EmissionColor", 1);
-            Water.material.DOColor(new Color(c.r, c.g, c.b, 0.3f), 1);
+            Water.material.DOColor(c, 1);
         }
 
     }
