@@ -13,6 +13,14 @@ public class GameController : Singleton<GameController>
     public GameState State
     { get; private set; }
 
+    /** Player's username. */
+    public string UserName
+    { get; private set; }
+
+    /** Whether player is logged in. */
+    public bool LoggedIn
+    { get { return !string.IsNullOrEmpty(UserName); } }
+
     /** The current work day. */
     public int Day
     { get; private set; }
@@ -112,6 +120,12 @@ public class GameController : Singleton<GameController>
     // Public Methods
     // -----------------------------------------------------
 
+    /** Login to the game. */
+    public void Login(string name)
+    {
+        UserName = name;
+    }
+
     /** Adds some score to the game. */
     public void Deliver(Pod pod)
     {
@@ -198,7 +212,13 @@ public class GameController : Singleton<GameController>
 
         // Look at monitor.
         CameraController.Instance.LookAtMonitor();
+        MenuController.Instance.ShowLoginScreen();
 
+        // Wait for player to log in.
+        while (!LoggedIn)
+            yield return 0;
+
+        // Delay a bit after login.
         yield return new WaitForSeconds(1);
     }
 
@@ -229,6 +249,7 @@ public class GameController : Singleton<GameController>
 
         // Look at working area.
         CameraController.Instance.LookAtWorkArea();
+        MenuController.Instance.ShowWorkingScreen();
 
         // Start coroutine for spawning pods.
         StartCoroutine(SpawnPodRoutine());
