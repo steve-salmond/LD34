@@ -1,0 +1,235 @@
+fileFormatVersion: 2
+guid: bcc4a011de1542346907dbbf7df42523
+timeCreated: 1449969202
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Adult
+    100002: Adult_ArmLower.L
+    100004: Adult_ArmLower.R
+    100006: Adult_ArmUpper.L
+    100008: Adult_ArmUpper.R
+    100010: Adult_Foot.L
+    100012: Adult_Foot.L_end
+    100014: Adult_Foot.R
+    100016: Adult_Foot.R_end
+    100018: Adult_Hand.L
+    100020: Adult_Hand.L_end
+    100022: Adult_Hand.R
+    100024: Adult_Hand.R_end
+    100026: Adult_Shin.L
+    100028: Adult_Shin.R
+    100030: Adult_Thigh.L
+    100032: Adult_Thigh.R
+    100034: Belly
+    100036: Chest
+    100038: Cord01
+    100040: Cord02
+    100042: Cord03
+    100044: Cord04
+    100046: Cord05
+    100048: Cord05_end
+    100050: Cord06
+    100052: Cord06_end
+    100054: Head
+    100056: Head_end
+    100058: Hips
+    100060: //RootNode
+    100062: Human_Adult
+    100064: Neck
+    100066: Root
+    100068: Root_end
+    400000: Adult
+    400002: Adult_ArmLower.L
+    400004: Adult_ArmLower.R
+    400006: Adult_ArmUpper.L
+    400008: Adult_ArmUpper.R
+    400010: Adult_Foot.L
+    400012: Adult_Foot.L_end
+    400014: Adult_Foot.R
+    400016: Adult_Foot.R_end
+    400018: Adult_Hand.L
+    400020: Adult_Hand.L_end
+    400022: Adult_Hand.R
+    400024: Adult_Hand.R_end
+    400026: Adult_Shin.L
+    400028: Adult_Shin.R
+    400030: Adult_Thigh.L
+    400032: Adult_Thigh.R
+    400034: Belly
+    400036: Chest
+    400038: Cord01
+    400040: Cord02
+    400042: Cord03
+    400044: Cord04
+    400046: Cord05
+    400048: Cord05_end
+    400050: Cord06
+    400052: Cord06_end
+    400054: Head
+    400056: Head_end
+    400058: Hips
+    400060: Human_Adult
+    400062: //RootNode
+    400064: Neck
+    400066: Root
+    400068: Root_end
+    4300000: Human_Adult
+    7400000: Adult|Adult_Idle
+    9500000: //RootNode
+    13700000: Human_Adult
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Adult|Adult_Idle
+      takeName: Adult|Adult_Idle
+      firstFrame: 0
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Adult
+        weight: 1
+      - path: Adult/Cord01
+        weight: 1
+      - path: Adult/Cord01/Cord02
+        weight: 1
+      - path: Adult/Cord01/Cord02/Cord03
+        weight: 1
+      - path: Adult/Cord01/Cord02/Cord03/Cord04
+        weight: 1
+      - path: Adult/Cord01/Cord02/Cord03/Cord04/Cord05
+        weight: 1
+      - path: Adult/Cord01/Cord02/Cord03/Cord04/Cord05/Cord05_end
+        weight: 1
+      - path: Adult/Hips
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.L
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.L/Adult_Shin.L
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.L/Adult_Shin.L/Adult_Foot.L
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.L/Adult_Shin.L/Adult_Foot.L/Adult_Foot.L_end
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.R
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.R/Adult_Shin.R
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.R/Adult_Shin.R/Adult_Foot.R
+        weight: 1
+      - path: Adult/Hips/Adult_Thigh.R/Adult_Shin.R/Adult_Foot.R/Adult_Foot.R_end
+        weight: 1
+      - path: Adult/Hips/Belly
+        weight: 1
+      - path: Adult/Hips/Belly/Chest
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.L
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.L/Adult_ArmLower.L
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.L/Adult_ArmLower.L/Adult_Hand.L
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.L/Adult_ArmLower.L/Adult_Hand.L/Adult_Hand.L_end
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.R
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.R/Adult_ArmLower.R
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.R/Adult_ArmLower.R/Adult_Hand.R
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Adult_ArmUpper.R/Adult_ArmLower.R/Adult_Hand.R/Adult_Hand.R_end
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Neck
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Neck/Head
+        weight: 1
+      - path: Adult/Hips/Belly/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Adult/Hips/Cord06
+        weight: 1
+      - path: Adult/Hips/Cord06/Cord06_end
+        weight: 1
+      - path: Adult/Root
+        weight: 1
+      - path: Adult/Root/Root_end
+        weight: 1
+      - path: Human_Adult
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,152 @@
+fileFormatVersion: 2
+guid: a5b9237cbb055ee4ca9e30a2dc13a511
+timeCreated: 1449970318
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Cord01
+    100002: Cord02
+    100004: Cord03
+    100006: Cord04
+    100008: Cord05
+    100010: Cord06
+    100012: Cord06_end
+    100014: Fetus
+    100016: //RootNode
+    100018: Human_Fetus
+    100020: HumanRoot
+    100022: HumanRoot_end
+    100024: Root
+    100026: Root_end
+    400000: Cord01
+    400002: Cord02
+    400004: Cord03
+    400006: Cord04
+    400008: Cord05
+    400010: Cord06
+    400012: Cord06_end
+    400014: Fetus
+    400016: //RootNode
+    400018: Human_Fetus
+    400020: HumanRoot
+    400022: HumanRoot_end
+    400024: Root
+    400026: Root_end
+    4300000: Human_Fetus
+    7400000: Fetus|Baby_Idle
+    7400002: Fetus|Fetus_Idle
+    9500000: //RootNode
+    13700000: Human_Fetus
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Fetus|Fetus_Idle
+      takeName: Fetus|Fetus_Idle
+      firstFrame: 0
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Fetus
+        weight: 1
+      - path: Fetus/Cord01
+        weight: 1
+      - path: Fetus/Cord01/Cord02
+        weight: 1
+      - path: Fetus/Cord01/Cord02/Cord03
+        weight: 1
+      - path: Fetus/Cord01/Cord02/Cord03/Cord04
+        weight: 1
+      - path: Fetus/Cord01/Cord02/Cord03/Cord04/Cord05
+        weight: 1
+      - path: Fetus/Cord01/Cord02/Cord03/Cord04/Cord05/Cord06
+        weight: 1
+      - path: Fetus/Cord01/Cord02/Cord03/Cord04/Cord05/Cord06/Cord06_end
+        weight: 1
+      - path: Fetus/HumanRoot
+        weight: 1
+      - path: Fetus/HumanRoot/HumanRoot_end
+        weight: 1
+      - path: Fetus/Root
+        weight: 1
+      - path: Fetus/Root/Root_end
+        weight: 1
+      - path: Human_Fetus
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

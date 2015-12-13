@@ -1,0 +1,235 @@
+fileFormatVersion: 2
+guid: 9c733fb716cc84d4c949c2a7320b14c3
+timeCreated: 1449970318
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: ArmLower.L
+    100002: ArmLower.R
+    100004: ArmUpper.L
+    100006: ArmUpper.R
+    100008: Belly
+    100010: Chest
+    100012: Child
+    100014: Cord01
+    100016: Cord02
+    100018: Cord03
+    100020: Cord04
+    100022: Cord05
+    100024: Cord05_end
+    100026: Cord06
+    100028: Cord06_end
+    100030: Foot.L
+    100032: Foot.L_end
+    100034: Foot.R
+    100036: Foot.R_end
+    100038: Hand.L
+    100040: Hand.L_end
+    100042: Hand.R
+    100044: Hand.R_end
+    100046: Head
+    100048: Head_end
+    100050: Hips
+    100052: //RootNode
+    100054: Human_Child
+    100056: Neck
+    100058: Root
+    100060: Root_end
+    100062: Shin.L
+    100064: Shin.R
+    100066: Thigh.L
+    100068: Thigh.R
+    400000: ArmLower.L
+    400002: ArmLower.R
+    400004: ArmUpper.L
+    400006: ArmUpper.R
+    400008: Belly
+    400010: Chest
+    400012: Child
+    400014: Cord01
+    400016: Cord02
+    400018: Cord03
+    400020: Cord04
+    400022: Cord05
+    400024: Cord05_end
+    400026: Cord06
+    400028: Cord06_end
+    400030: Foot.L
+    400032: Foot.L_end
+    400034: Foot.R
+    400036: Foot.R_end
+    400038: Hand.L
+    400040: Hand.L_end
+    400042: Hand.R
+    400044: Hand.R_end
+    400046: Head
+    400048: Head_end
+    400050: Hips
+    400052: Human_Child
+    400054: //RootNode
+    400056: Neck
+    400058: Root
+    400060: Root_end
+    400062: Shin.L
+    400064: Shin.R
+    400066: Thigh.L
+    400068: Thigh.R
+    4300000: Human_Child
+    7400000: Child|Child_Idle
+    9500000: //RootNode
+    13700000: Human_Child
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Child|Child_Idle
+      takeName: Child|Child_Idle
+      firstFrame: 0
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Child
+        weight: 1
+      - path: Child/Cord01
+        weight: 1
+      - path: Child/Cord01/Cord02
+        weight: 1
+      - path: Child/Cord01/Cord02/Cord03
+        weight: 1
+      - path: Child/Cord01/Cord02/Cord03/Cord04
+        weight: 1
+      - path: Child/Cord01/Cord02/Cord03/Cord04/Cord05
+        weight: 1
+      - path: Child/Cord01/Cord02/Cord03/Cord04/Cord05/Cord05_end
+        weight: 1
+      - path: Child/Hips
+        weight: 1
+      - path: Child/Hips/Belly
+        weight: 1
+      - path: Child/Hips/Belly/Chest
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.L
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.L/ArmLower.L
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.L/ArmLower.L/Hand.L
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.L/ArmLower.L/Hand.L/Hand.L_end
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.R
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.R/ArmLower.R
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.R/ArmLower.R/Hand.R
+        weight: 1
+      - path: Child/Hips/Belly/Chest/ArmUpper.R/ArmLower.R/Hand.R/Hand.R_end
+        weight: 1
+      - path: Child/Hips/Belly/Chest/Neck
+        weight: 1
+      - path: Child/Hips/Belly/Chest/Neck/Head
+        weight: 1
+      - path: Child/Hips/Belly/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Child/Hips/Cord06
+        weight: 1
+      - path: Child/Hips/Cord06/Cord06_end
+        weight: 1
+      - path: Child/Hips/Thigh.L
+        weight: 1
+      - path: Child/Hips/Thigh.L/Shin.L
+        weight: 1
+      - path: Child/Hips/Thigh.L/Shin.L/Foot.L
+        weight: 1
+      - path: Child/Hips/Thigh.L/Shin.L/Foot.L/Foot.L_end
+        weight: 1
+      - path: Child/Hips/Thigh.R
+        weight: 1
+      - path: Child/Hips/Thigh.R/Shin.R
+        weight: 1
+      - path: Child/Hips/Thigh.R/Shin.R/Foot.R
+        weight: 1
+      - path: Child/Hips/Thigh.R/Shin.R/Foot.R/Foot.R_end
+        weight: 1
+      - path: Child/Root
+        weight: 1
+      - path: Child/Root/Root_end
+        weight: 1
+      - path: Human_Child
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
