@@ -1,36 +1,17 @@
 fileFormatVersion: 2
-guid: 354684313c353a446bad741d4544a81b
-timeCreated: 1449907085
+guid: 0ff9898e1dc3167489f83b4d7288fd7d
+timeCreated: 1428999536
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: HexTiles
-    100004: Room
-    100006: SquareTIles
-    100008: LightPanels
     400000: //RootNode
-    400002: HexTiles
-    400004: Room
-    400006: SquareTIles
-    400008: LightPanels
     2300000: //RootNode
-    2300002: HexTiles
-    2300004: Room
-    2300006: SquareTIles
-    2300008: LightPanels
     3300000: //RootNode
-    3300002: HexTiles
-    3300004: Room
-    3300006: SquareTIles
-    3300008: LightPanels
-    4300000: Room
-    4300002: HexTiles
-    4300004: SquareTIles
-    4300006: LightPanels
+    4300000: Sphere01
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
