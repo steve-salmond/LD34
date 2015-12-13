@@ -8,17 +8,22 @@ ModelImporter:
     100000: //RootNode
     100002: Pod
     100004: PodWater
+    100006: CordHolder
     400000: //RootNode
     400002: Pod
     400004: PodWater
+    400006: CordHolder
     2300000: //RootNode
     2300002: Pod
     2300004: PodWater
+    2300006: CordHolder
     3300000: //RootNode
     3300002: Pod
     3300004: PodWater
+    3300006: CordHolder
     4300000: Pod
     4300002: PodWater
+    4300004: CordHolder
   materials:
     importMaterials: 1
     materialName: 0
