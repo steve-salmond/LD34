@@ -204,31 +204,16 @@ public class Pod : MonoBehaviour
         GrowthTarget = Growth;
         DOTween.To(SetGrowth, old, GrowthTarget, 1);
 
-        /*
-        // Determine new water color.
-        var waterColor = Color.black;
-        int fullSlots = 0;
-        foreach (var slot in Slots)
-            if (slot.IsFull)
-            {
-                waterColor += slot.Color;
-                fullSlots++;
-            }
-
-        // Rescale color to be in range.
-        if (fullSlots > 0)
-            waterColor /= fullSlots;
-        */
-
         // Determine new water color.
         float fullSlots = Slots.Count(slot => slot.IsFull);
         if (fullSlots > 0)
         {
             var ratio = Slots.Count(slot => slot.IsGood) / fullSlots;
-            var waterColor = Color.Lerp(BadWaterColor, GoodWaterColor, ratio);
+            var c = Color.Lerp(BadWaterColor, GoodWaterColor, ratio);
             Water.material = new Material(Water.material);
             Water.material.EnableKeyword("_EMISSION");
-            Water.material.DOColor(waterColor, "_EmissionColor", 1);
+            Water.material.DOColor(c, "_EmissionColor", 1);
+            Water.material.DOColor(new Color(c.r, c.g, c.b, 0.3f), 1);
         }
 
     }

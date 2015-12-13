@@ -31,8 +31,8 @@ public class ResultsScreen : Singleton<ResultsScreen>
         Viability.text = pod.IsGood ? "VIABLE" : "REJECT";
 
         DOTween.Sequence()
-            .Append(Viability.DOColor(pod.IsGood ? Color.green : Color.red, 0.5f))
-            .Append(Viability.DOColor(Color.white, 0.5f));
+            .Append(Viability.DOColor(pod.IsGood ? Color.green : Color.red, 0.5f));
+            // .Append(Viability.DOColor(Color.white, 0.5f));
 
         DOTween.Sequence()
             .Append(Viability.transform.DOPunchScale(Vector3.one, 0.5f))

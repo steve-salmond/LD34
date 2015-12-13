@@ -146,7 +146,8 @@ public class PodSlot : MonoBehaviour
     private void SetEmissionColor(MeshRenderer mesh, Color c, float a = 1)
     {
         mesh.material = new Material(mesh.material);
-        mesh.material.DOColor(new Color(c.r * a, c.g * a, c.b * a, a), 0.5f);
+        mesh.material.EnableKeyword("_EMISSION");
+        mesh.material.DOColor(new Color(c.r * a, c.g * a, c.b * a, a), "_EmissionColor", 0.5f);
     }
 
     /** Nutrient configuration. */
