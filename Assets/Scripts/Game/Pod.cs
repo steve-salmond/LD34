@@ -202,7 +202,7 @@ public class Pod : MonoBehaviour
         // Set the new growth fraction.
         var old = GrowthTarget;
         GrowthTarget = Growth;
-        DOTween.To(SetGrowth, old, GrowthTarget, 1);
+        DOTween.To(SetGrowth, old, GrowthTarget, 2);
 
         // Determine new water color.
         float fullSlots = Slots.Count(slot => slot.IsFull);

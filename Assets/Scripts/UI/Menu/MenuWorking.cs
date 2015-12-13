@@ -41,12 +41,13 @@ public class MenuWorking : MonoBehaviour
         var viable = GameController.Instance.PodGoodCount;
         var quota = GameController.Instance.PodQuota;
 
-        if (viable >= quota)
+        if (viable == quota)
+        {
             Delivered.DOColor(Color.green, 0.5f);
-
-        DOTween.Sequence()
-            .Append(Delivered.transform.DOPunchScale(Vector3.one, 0.5f, 1))
-            .Append(Delivered.transform.DOScale(Vector3.one, 0.2f));
+            DOTween.Sequence()
+                .Append(Delivered.transform.DOPunchScale(Vector3.one, 0.5f, 1))
+                .Append(Delivered.transform.DOScale(Vector3.one, 0.2f));
+        }
     }
 
 }

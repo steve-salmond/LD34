@@ -335,7 +335,6 @@ public class GameController : Singleton<GameController>
             yield return 0;
 
         // Wait a bit for final pod delivery.
-        yield return new WaitForSeconds(PodInterval);
         yield return new WaitForSeconds(1);
     }
 
@@ -387,6 +386,10 @@ public class GameController : Singleton<GameController>
         while (State == GameState.GameOver)
             yield return 0;
 
+        // Fade to black.
+        UIScreenFlash.Instance.Flash(Color.black, 1, 1);
+        yield return new WaitForSeconds(1);
+
         // Start a new game.
         StartCoroutine(GameRoutine());
     }
@@ -401,6 +404,10 @@ public class GameController : Singleton<GameController>
         // Wait till player completes game over.
         while (State == GameState.GameOver)
             yield return 0;
+
+        // Fade to black.
+        UIScreenFlash.Instance.Flash(Color.black, 1, 1);
+        yield return new WaitForSeconds(1);
 
         // Start a new game.
         StartCoroutine(GameRoutine());

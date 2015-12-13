@@ -23,8 +23,8 @@ public class CameraController : Singleton<CameraController>
 
     public void GoToWaypoint(Transform waypoint)
     {
-        CameraRig.transform.DOMove(waypoint.position, 1);
-        CameraRig.transform.DORotateQuaternion(waypoint.rotation, 1).SetEase(Ease.OutBack);
+        CameraRig.transform.DOMove(waypoint.position, 1.5f);
+        CameraRig.transform.DORotateQuaternion(waypoint.rotation, 1.5f).SetEase(Ease.OutBack);
     }
    
 }

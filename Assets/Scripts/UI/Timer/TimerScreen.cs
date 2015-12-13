@@ -41,7 +41,7 @@ public class TimerScreen : MonoBehaviour
             .Append(Score.DOColor(Color.white, 0.5f));
 
         DOTween.Sequence()
-            .Append(Score.transform.DOPunchScale(Vector3.one, 0.5f))
+            .Append(Score.transform.DOPunchScale(Vector3.one * 0.25f, 0.5f, 3))
             .Append(Score.transform.DOScale(Vector3.one, 0.2f));
     }
 }
