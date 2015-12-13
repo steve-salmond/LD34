@@ -55,6 +55,14 @@ public class Pod : MonoBehaviour
     { get { return (Slots.Count(slot => slot.IsGood) / Slots.Count); } }
 
 
+    // Private Properties
+    // -----------------------------------------------------
+
+    /** Target growth fraction. */
+    private float GrowthTarget;
+
+
+
     // Unity Implementation
     // -----------------------------------------------------
 
@@ -171,7 +179,9 @@ public class Pod : MonoBehaviour
         transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);
 
         // Set the new growth fraction.
-        SetGrowth(Growth);
+        var old = GrowthTarget;
+        GrowthTarget = Growth;
+        DOTween.To(SetGrowth, old, GrowthTarget, 1);
     }
 
     /** Set the growth stage value. */
