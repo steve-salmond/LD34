@@ -307,8 +307,9 @@ public class GameController : Singleton<GameController>
         while (PodsToDeliver > 0)
             yield return 0;
 
-        // Wait a bit for final pod delivery
-        yield return new WaitForSeconds(0.5f);
+        // Wait a bit for final pod delivery.
+        yield return new WaitForSeconds(PodInterval);
+        yield return new WaitForSeconds(1);
     }
 
     /** Handle the end of a day's shift. */

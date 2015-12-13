@@ -45,6 +45,9 @@ public class Pod : MonoBehaviour
     /** Adult growth stage. */
     public Transform Adult;
 
+    /** Growth bubble effect. */
+    public ParticleSystem GrowthBubbles;
+
     /** Return the current score for this pod. */
     public int Score
     { get { return Slots.Sum(slot => slot.Score); } }
@@ -55,7 +58,7 @@ public class Pod : MonoBehaviour
 
     /** Get the pod's growth fraction. */
     public float Growth
-    { get { return (Slots.Count(slot => slot.IsGood) / Slots.Count); } }
+    { get { return ((float) (Slots.Count(slot => slot.IsGood)) / Slots.Count); } }
 
 
     // Private Properties
@@ -184,6 +187,9 @@ public class Pod : MonoBehaviour
         // Shake the human as it grows.
         Human.DOPunchScale(new Vector3(0.5f, 0, 0.5f), 1.5f, 5);
 
+        // Play the growth bubble effect.
+        GrowthBubbles.Play();
+
         // Set the new growth fraction.
         var old = GrowthTarget;
         GrowthTarget = Growth;
@@ -198,15 +204,15 @@ public class Pod : MonoBehaviour
         Child.gameObject.SetActive(false);
         Adult.gameObject.SetActive(false);
 
-        if (value < 0.25f)
+        if (value < 0.1f)
         {
             Fetus.gameObject.SetActive(true);
         }
-        else if (value < 0.5f)
+        else if (value < 0.35f)
         {
             Baby.gameObject.SetActive(true);
         }
-        else if (value < 0.75f)
+        else if (value < 0.7f)
         {
             Child.gameObject.SetActive(true);
         }

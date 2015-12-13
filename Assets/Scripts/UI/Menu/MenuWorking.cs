@@ -16,9 +16,10 @@ public class MenuWorking : MonoBehaviour
         var day = GameController.Instance.Day;
         var days = GameController.Instance.MaxDays;
         var quota = GameController.Instance.PodQuota;
+        var total = GameController.Instance.PodTotalCount;
 
         Title.text = string.Format("SHIFT {0} of {1}", day, days);
-        Quota.text = string.Format("TODAY'S QUOTA - {0}", quota);
+        Quota.text = string.Format("TODAY'S QUOTA - {0} of {1}", quota, total);
     }
 
     void Update()
