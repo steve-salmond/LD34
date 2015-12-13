@@ -34,6 +34,10 @@ public class Pod : MonoBehaviour
     public int Score
     { get { return Slots.Sum(slot => slot.Score); } }
 
+    /** Return whether pod is acceptable for delivery. */
+    public bool IsGood
+    { get { return (Slots.Count(slot => slot.IsGood) / Slots.Count) >= 0.5f; } }
+
 
 
     // Unity Implementation
@@ -89,6 +93,7 @@ public class Pod : MonoBehaviour
 
         // Deliver the pod.
         Deliver();
+        yield return new WaitForSeconds(0.5f);
 
         // Advance until it's time to die.
         for (int i = 0; i < StepsToDeath; i++)
@@ -127,17 +132,14 @@ public class Pod : MonoBehaviour
     /** Deliver the pod. */
     private void Deliver()
     {
-        // Determine if pod meets the grade.
-        var passes = (Slots.Count(slot => slot.IsGood) / Slots.Count) >= 0.5f;
-
         // Update game score.
-        GameController.Instance.AddScore(Score);
+        GameController.Instance.Deliver(this);
 
         // Shake the pod a bit.
         transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);
 
         // Move pod up or down depending on whether it passes.
-        if (passes)
+        if (IsGood)
             Capsule.DOMoveY(10, 0.5f).SetRelative();
         else
             Capsule.DOMoveY(-10, 0.5f).SetRelative();

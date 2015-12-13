@@ -17,22 +17,34 @@ public class GameController : Singleton<GameController>
     public int Day
     { get; private set; }
 
-    /** Duration for the current day's shift (seconds). */
-    public float Duration
+    /** Pods spawned today. */
+    public int PodCount
     { get; private set; }
 
-    /** Score quota for the current day. */
-    public int Quota
+    /** Total pod count for today's shift (seconds). */
+    public int PodTotalCount
+    { get; private set; }
+
+    /** Number of pods yet to be delivered today. */
+    public int PodsToDeliver
+    { get; private set; }
+
+    /** Number of pods successfully delivered. */
+    public int PodGoodCount
+    { get; private set; }
+
+    /** Number of pods unsuccessfully delivered. */
+    public int PodBadCount
+    { get; private set; }
+
+    /** Pod quota for the current day. */
+    public int PodQuota
     { get; private set; }
 
     /** Player's score for today. */
     public int Score
     { get; private set; }
-
-    /** Time left in the current day's shift (seconds). */
-    public float TimeLeft
-    { get; private set; }
-
+    
     /** Player's total score to date. */
     public int TotalScore
     { get; private set; }
@@ -46,10 +58,10 @@ public class GameController : Singleton<GameController>
     // -----------------------------------------------------
 
     /** Curve indicating the initial time allocated on a given day. */
-    public AnimationCurve DurationCurve;
+    public AnimationCurve PodTotalCurve;
 
-    /** Curve indicating the initial time allocated on a given day. */
-    public AnimationCurve QuotaCurve;
+    /** Curve indicating the initial pod count per day. */
+    public AnimationCurve PodQuotaCurve;
 
     /** Curve indicating the interval between successive pods on a given day. */
     public AnimationCurve PodIntervalCurve;
@@ -101,15 +113,25 @@ public class GameController : Singleton<GameController>
     // -----------------------------------------------------
 
     /** Adds some score to the game. */
-    public void AddScore(int value)
+    public void Deliver(Pod pod)
     {
-        // Can only add score during working shift.
+        // Can only deliver pods during working shift.
         if (State != GameState.Working)
             return;
 
         // Update score values.
-        Score += value;
-        TotalScore += value;
+        var score = pod.Score;
+        Score += score;
+        TotalScore += score;
+
+        // Pod has been delivered.
+        PodsToDeliver--;
+
+        // Update good / bad counts.
+        if (pod.IsGood)
+            PodGoodCount++;
+        else
+            PodBadCount++;
     }
 
     /** Nutrient configuration. */
@@ -190,8 +212,12 @@ public class GameController : Singleton<GameController>
 
         // Set up today's shift.
         Day = Day + 1;
-        Quota = Mathf.RoundToInt(QuotaCurve.Evaluate(Day));
-        Duration = Mathf.RoundToInt(DurationCurve.Evaluate(Day));
+        PodCount = 0;
+        PodGoodCount = 0;
+        PodBadCount = 0;
+        PodTotalCount = Mathf.RoundToInt(PodTotalCurve.Evaluate(Day));
+        PodsToDeliver = PodTotalCount;
+        PodQuota = Mathf.RoundToInt(PodQuotaCurve.Evaluate(Day));
 
         yield return new WaitForSeconds(1);
     }
@@ -204,35 +230,24 @@ public class GameController : Singleton<GameController>
         // Look at working area.
         CameraController.Instance.LookAtWorkArea();
 
-        // Determine when today's shift will end.
-        var endOfDay = Time.time + Duration;
-
         // Start coroutine for spawning pods.
         StartCoroutine(SpawnPodRoutine());
 
-        // Wait until the day is over.
-        while (Time.time < endOfDay)
-        {
-            // Update the current time left.
-            var t = Time.time;
-            TimeLeft = Mathf.Max(0, endOfDay - t);
-
-            // Wait until the next frame.
+        // Wait until all pods have been delivered.
+        while (PodsToDeliver > 0)
             yield return 0;
-        }
 
-        // Day is over.
-        TimeLeft = 0;
-
-        yield return 0;
+        // Wait a bit for final pod delivery
+        yield return new WaitForSeconds(PodInterval * 2);
     }
 
     /** Handle the end of a day's shift. */
     private IEnumerator SpawnPodRoutine()
     {
-        while (State == GameState.Working)
+        while (PodCount < PodTotalCount)
         {
             Instantiate(PodPrefab, PodSpawnPoint.position, Quaternion.identity);
+            PodCount++;
             yield return new WaitForSeconds(PodInterval);
         }
     }
@@ -245,11 +260,11 @@ public class GameController : Singleton<GameController>
         // Look at monitor.
         CameraController.Instance.LookAtMonitor();
 
-        yield return new WaitForSeconds(5);
-
-        // Check if player has failed to meet today's quota.
-        if (Score < Quota)
+        // Check if player has failed to meet today's pod quota.
+        if (PodGoodCount < PodQuota)
             SetState(GameState.GameOver);
+        else
+            yield return new WaitForSeconds(5);
 
         yield return 0;
     }
