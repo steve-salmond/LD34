@@ -45,6 +45,10 @@ public class GameController : Singleton<GameController>
     public int PodBadCount
     { get; private set; }
 
+    /** Number of pods delivered. */
+    public int PodDeliveredCount
+    { get; private set; }
+
     /** Pod quota for the current day. */
     public int PodQuota
     { get; private set; }
@@ -180,6 +184,7 @@ public class GameController : Singleton<GameController>
         AddScore(pod.IsGood ? PodGoodScore : PodBadScore);
 
         // Pod has been delivered.
+        PodDeliveredCount++;
         PodsToDeliver--;
 
         // Update good / bad counts.
@@ -187,6 +192,9 @@ public class GameController : Singleton<GameController>
             PodGoodCount++;
         else
             PodBadCount++;
+
+        // Tell results screen about pod.
+        ResultsScreen.Instance.Deliver(pod);
     }
 
     /** Add to player's score. */
@@ -294,6 +302,7 @@ public class GameController : Singleton<GameController>
         // Set up today's shift.
         Day = Day + 1;
         PodCount = 0;
+        PodDeliveredCount = 0;
         PodGoodCount = 0;
         PodBadCount = 0;
         PodTotalCount = Mathf.RoundToInt(PodTotalCurve.Evaluate(DayFraction));
