@@ -105,6 +105,9 @@ public class PodSlot : MonoBehaviour
         // Consume the blob.
         SetCurrent(blob.Nutrient);
 
+        // Update player's score.
+        GameController.Instance.AddScore(Score);
+
         return true;
     }
 

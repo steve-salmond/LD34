@@ -90,6 +90,12 @@ public class GameController : Singleton<GameController>
     /** Curve indicating the maximum pod slot count on a given day. */
     public AnimationCurve PodSlotCountMaxCurve;
 
+    /** Score for delivering a good pod. */
+    public int PodGoodScore = 100;
+
+    /** Penalty for a bad pod. */
+    public int PodBadScore = -25;
+
     /** Prefab for creating new pods. */
     public Pod PodPrefab;
 
@@ -163,7 +169,7 @@ public class GameController : Singleton<GameController>
     { SetState(GameState.Intro); }
 
 
-    /** Adds some score to the game. */
+    /** Deliver a pod. */
     public void Deliver(Pod pod)
     {
         // Can only deliver pods during working shift.
@@ -171,9 +177,7 @@ public class GameController : Singleton<GameController>
             return;
 
         // Update score values.
-        var score = pod.Score;
-        Score += score;
-        TotalScore += score;
+        AddScore(pod.IsGood ? PodGoodScore : PodBadScore);
 
         // Pod has been delivered.
         PodsToDeliver--;
@@ -183,6 +187,13 @@ public class GameController : Singleton<GameController>
             PodGoodCount++;
         else
             PodBadCount++;
+    }
+
+    /** Add to player's score. */
+    public void AddScore(int score)
+    {
+        Score += score;
+        TotalScore += score;
     }
 
     /** Nutrient configuration. */
