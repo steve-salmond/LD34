@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 using DG.Tweening;
@@ -35,6 +36,9 @@ public class NutrientDispenser : MonoBehaviour
     public NutrientConfig NutrientConfig
     { get { return GameController.Instance.GetNutrientConfig(Nutrient); } }
 
+    /** Dispensers' label. */
+    public Text Label
+    { get; private set; }
 
 
     // Public Methods
@@ -67,6 +71,10 @@ public class NutrientDispenser : MonoBehaviour
         if (Button)
             Button.SetDispenser(this);
 
+        // Configure label.
+        Label = GetComponentInChildren<Text>();
+        Label.text = Key;
+
         // Fire up the game control routine.
         StartCoroutine(UpdateRoutine());
     }
@@ -85,7 +93,7 @@ public class NutrientDispenser : MonoBehaviour
         while (true)
         {
             var working = GameController.Instance.IsWorking;
-            if (working && Input.GetKeyDown(Key) && !Dispensing)
+            if (working && Input.GetKey(Key) && !Dispensing)
                 yield return StartCoroutine(Dispense());
 
             yield return 0;

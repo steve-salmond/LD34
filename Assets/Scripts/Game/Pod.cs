@@ -63,7 +63,11 @@ public class Pod : MonoBehaviour
 
     /** Return whether pod is acceptable for delivery. */
     public bool IsGood
-    { get { return Growth >= 1; } }
+    { get { return Growth >= 0.5f; } }
+
+    /** Return whether pod is fully grown. */
+    public bool IsFullyGrown
+    { get { return Growth >= 1.0f; } }
 
     /** Get the pod's growth fraction. */
     public float Growth
@@ -167,6 +171,7 @@ public class Pod : MonoBehaviour
             }
 
         // Kill the blob.
+        blob.Splash();
         Destroy(blob.gameObject);
     }
 

@@ -94,8 +94,11 @@ public class GameController : Singleton<GameController>
     /** Curve indicating the maximum pod slot count on a given day. */
     public AnimationCurve PodSlotCountMaxCurve;
 
+    /** Score for delivering a perfect pod. */
+    public int PodPerfectScore = 100;
+
     /** Score for delivering a good pod. */
-    public int PodGoodScore = 100;
+    public int PodGoodScore = 50;
 
     /** Penalty for a bad pod. */
     public int PodBadScore = -25;
@@ -181,7 +184,12 @@ public class GameController : Singleton<GameController>
             return;
 
         // Update score values.
-        AddScore(pod.IsGood ? PodGoodScore : PodBadScore);
+        if (pod.IsFullyGrown)
+            AddScore(PodPerfectScore);
+        else if (pod.IsGood)
+            AddScore(PodGoodScore);
+        else
+            AddScore(PodBadScore);
 
         // Pod has been delivered.
         PodDeliveredCount++;

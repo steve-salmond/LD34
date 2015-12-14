@@ -18,6 +18,22 @@ public class NutrientBlob : MonoBehaviour
     /** Blob's trail. */
     public ParticleSystem Trail;
 
+    /** Blob's splash effect. */
+    public GameObject SplashEffect;
+
+
+    // Public Methods
+    // -----------------------------------------------------
+
+    /** Create a splash. */
+    public void Splash()
+    {
+        var go = Instantiate(SplashEffect, transform.position, Quaternion.identity) as GameObject;
+
+        var ps = go.GetComponentInChildren<ParticleSystem>();
+        ps.startColor = GetNutrientConfig(Nutrient).OnColor;
+    }
+
 
     // Unity Implementation
     // -----------------------------------------------------
