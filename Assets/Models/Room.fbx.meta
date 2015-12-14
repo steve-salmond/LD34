@@ -14,6 +14,8 @@ ModelImporter:
     100012: Room_ShowLights
     100014: AlarmLight
     100016: Button
+    100018: Radio
+    100020: Radio_Button
     400000: //RootNode
     400002: HexTiles
     400004: Room
@@ -23,6 +25,8 @@ ModelImporter:
     400012: Room_ShowLights
     400014: AlarmLight
     400016: Button
+    400018: Radio
+    400020: Radio_Button
     2300000: //RootNode
     2300002: HexTiles
     2300004: Room
@@ -32,6 +36,8 @@ ModelImporter:
     2300012: Room_ShowLights
     2300014: AlarmLight
     2300016: Button
+    2300018: Radio
+    2300020: Radio_Button
     3300000: //RootNode
     3300002: HexTiles
     3300004: Room
@@ -41,6 +47,8 @@ ModelImporter:
     3300012: Room_ShowLights
     3300014: AlarmLight
     3300016: Button
+    3300018: Radio
+    3300020: Radio_Button
     4300000: Room
     4300002: HexTiles
     4300004: SquareTIles
@@ -49,6 +57,8 @@ ModelImporter:
     4300010: Room_ShowLights
     4300012: AlarmLight
     4300014: Button
+    4300016: Radio_Button
+    4300018: Radio
   materials:
     importMaterials: 1
     materialName: 0
