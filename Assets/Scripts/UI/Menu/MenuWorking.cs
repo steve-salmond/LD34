@@ -68,7 +68,10 @@ public class MenuWorking : MonoBehaviour
             yield return StartCoroutine(MessageRoutine("Make perfect specimens for bonus wages!"));
         }
         else if (day == 2)
-            yield return StartCoroutine(MessageRoutine("Clones are picky - feed nutrients in the proper order!\n(LEFT to RIGHT)!"));
+        {
+            yield return StartCoroutine(MessageRoutine("Clones are picky - feed nutrients in the proper order!\n(LEFT to RIGHT)!", 5));
+            yield return StartCoroutine(MessageRoutine("That's probably super confusing, sorry!"));
+        }
         else if (day == 3)
             yield return StartCoroutine(MessageRoutine("Things might start to get a bit tricky now.."));
         else if (day == 4)

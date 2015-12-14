@@ -37,6 +37,10 @@ public class GameController : Singleton<GameController>
     public int PodsToDeliver
     { get; private set; }
 
+    /** Number of perfect pods delivered. */
+    public int PodPerfectCount
+    { get; private set; }
+
     /** Number of pods successfully delivered. */
     public int PodGoodCount
     { get; private set; }
@@ -201,6 +205,9 @@ public class GameController : Singleton<GameController>
         else
             PodBadCount++;
 
+        if (pod.IsFullyGrown)
+            PodPerfectCount++;
+
         // Tell results screen about pod.
         ResultsScreen.Instance.Deliver(pod);
     }
@@ -311,6 +318,7 @@ public class GameController : Singleton<GameController>
         Day = Day + 1;
         PodCount = 0;
         PodDeliveredCount = 0;
+        PodPerfectCount = 0;
         PodGoodCount = 0;
         PodBadCount = 0;
         PodTotalCount = Mathf.RoundToInt(PodTotalCurve.Evaluate(DayFraction));
