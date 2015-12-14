@@ -108,6 +108,9 @@ public class Pod : MonoBehaviour
         // Get list of active slots.
         Slots = slots.Where(slot => slot.gameObject.activeSelf).ToList();
 
+        // Open the first slot.
+        Slots[0].SetOpen(true);
+
         // Start out with zero growth.
         SetGrowth(0);
 
@@ -167,6 +170,14 @@ public class Pod : MonoBehaviour
             if (slot.Consume(blob))
             {
                 UpdateGrowth();
+                break;
+            }
+
+        // Open up the next slot.
+        foreach (var slot in Slots)
+            if (!slot.IsFull)
+            {
+                slot.SetOpen(true);
                 break;
             }
 

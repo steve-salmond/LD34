@@ -33,6 +33,10 @@ public class PodSlot : MonoBehaviour
     /** Score for empty slot state. */
     public int EmptyScore;
 
+    /** Whether slot is open. */
+    public bool Open
+    { get; private set; }
+
     /** Whether slot is empty. */
     public bool IsEmpty
     { get { return Current == Nutrient.None; } }
@@ -85,6 +89,13 @@ public class PodSlot : MonoBehaviour
     // Public Methods
     // -----------------------------------------------------
 
+    /** Open the slot. */
+    public void SetOpen(bool open)
+    {
+        Open = open;
+        SetRequested(Requested);
+    }
+
     /** Whether this slot can consume the given nutrient blob. */
     public bool CanConsume(NutrientBlob blob)
     {
@@ -123,7 +134,10 @@ public class PodSlot : MonoBehaviour
     private void SetRequested(Nutrient nutrient)
     {
         Requested = nutrient;
-        SetEmissionColor(RequestMesh, GetNutrientConfig(nutrient).OnColor);
+
+        var config = GetNutrientConfig(nutrient);
+        var color = Open ? config.OnColor : config.OffColor;
+        SetEmissionColor(RequestMesh, color);
     }
 
     /** Set the required nutrient. */
