@@ -335,6 +335,10 @@ public class GameController : Singleton<GameController>
         CameraController.Instance.LookAtWorkArea();
         MenuController.Instance.ShowWorkingScreen();
 
+        // Wait a bit on the first day to give player a chance to get oriented.
+        if (Day == 1)
+            yield return new WaitForSeconds(3);
+
         // Start coroutine for spawning pods.
         StartCoroutine(SpawnPodRoutine());
 
