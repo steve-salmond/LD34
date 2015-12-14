@@ -51,6 +51,9 @@ public class NutrientButton : MonoBehaviour
         if (!Dispenser)
             return;
 
+        // Make a keypress sound.
+        UISounds.Instance.KeyPress();
+
         var cooldown = Dispenser.Cooldown;
         transform.DOPunchScale(Vector3.one * 0.1f, cooldown);
         

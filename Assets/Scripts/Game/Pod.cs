@@ -57,6 +57,18 @@ public class Pod : MonoBehaviour
     /** Bad water color. */
     public Color BadWaterColor;
 
+    /** Effect when pod moves. */
+    public GameObject PodMovePrefab;
+
+    /** Effect when perfect pod is delivered. */
+    public GameObject PodDeliverPerfectPrefab;
+
+    /** Effect when good pod is delivered. */
+    public GameObject PodDeliverGoodPrefab;
+
+    /** Effect when bad pod is delivered. */
+    public GameObject PodDeliverBadPrefab;
+
     /** Return the current score for this pod. */
     public int Score
     { get { return Slots.Sum(slot => slot.Score); } }
@@ -154,6 +166,9 @@ public class Pod : MonoBehaviour
     /** Advances the pod by one step. */
     private IEnumerator Advance()
     {
+        var effect = Instantiate(PodMovePrefab, transform.position, transform.rotation) as GameObject;
+        effect.transform.parent = transform;
+
         transform.DOMove(StepOffset, StepTime).SetRelative();
         yield return new WaitForSeconds(StepTime);
     }
@@ -191,6 +206,11 @@ public class Pod : MonoBehaviour
     {
         // Update game score.
         GameController.Instance.Deliver(this);
+
+        var effectPrefab = IsFullyGrown ? PodDeliverPerfectPrefab : 
+            (IsGood ? PodDeliverGoodPrefab : PodDeliverBadPrefab);
+
+        Instantiate(effectPrefab, transform.position, transform.rotation);
 
         // Shake the pod a bit.
         transform.DOPunchScale(Vector3.one * 0.05f, 0.5f);

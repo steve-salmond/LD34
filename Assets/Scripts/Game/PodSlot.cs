@@ -136,7 +136,7 @@ public class PodSlot : MonoBehaviour
         Requested = nutrient;
 
         var config = GetNutrientConfig(nutrient);
-        var color = Open ? config.OnColor : config.OffColor;
+        var color = Open ? config.OnColor : Color.Lerp(config.OffColor, Color.black, 0.2f);
         SetEmissionColor(RequestMesh, color);
     }
 
