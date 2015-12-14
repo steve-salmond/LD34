@@ -16,6 +16,9 @@ ModelImporter:
     100016: Button
     100018: Radio
     100020: Radio_Button
+    100022: Coffee
+    100024: Phone
+    100026: Picture
     400000: //RootNode
     400002: HexTiles
     400004: Room
@@ -27,6 +30,9 @@ ModelImporter:
     400016: Button
     400018: Radio
     400020: Radio_Button
+    400022: Coffee
+    400024: Phone
+    400026: Picture
     2300000: //RootNode
     2300002: HexTiles
     2300004: Room
@@ -38,6 +44,9 @@ ModelImporter:
     2300016: Button
     2300018: Radio
     2300020: Radio_Button
+    2300022: Coffee
+    2300024: Phone
+    2300026: Picture
     3300000: //RootNode
     3300002: HexTiles
     3300004: Room
@@ -49,6 +58,9 @@ ModelImporter:
     3300016: Button
     3300018: Radio
     3300020: Radio_Button
+    3300022: Coffee
+    3300024: Phone
+    3300026: Picture
     4300000: Room
     4300002: HexTiles
     4300004: SquareTIles
@@ -59,6 +71,9 @@ ModelImporter:
     4300014: Button
     4300016: Radio_Button
     4300018: Radio
+    4300020: Phone
+    4300022: Coffee
+    4300024: Picture
   materials:
     importMaterials: 1
     materialName: 0
