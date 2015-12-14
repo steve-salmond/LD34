@@ -9,10 +9,37 @@ public class CameraController : Singleton<CameraController>
     public Transform MonitorWaypoint;
     public Transform WorkingWaypoint;
 
-    public void Start()
+    public float Aspect = 16 / 9.0f;
+
+    public Camera Camera;
+
+    public void Awake()
     {
         CameraRig.position = MonitorWaypoint.position;
         CameraRig.rotation = MonitorWaypoint.rotation;
+    }
+
+    private void Update()
+    {
+        UpdateAspect();
+    }
+
+    private void UpdateAspect()
+    {
+        var screenAspect = (float) Screen.width / (float) Screen.height;
+
+        if (screenAspect > Aspect)
+        {
+            Camera.rect = new Rect(0, 0, 1, 1);
+            return;
+        }
+
+        Rect rect = new Rect();
+        rect.width = 1;
+        rect.height = screenAspect / Aspect;
+        rect.x = 0;
+        rect.y = (1 - rect.height) * 0.5f;
+        Camera.rect = rect;
     }
 
     public void LookAtMonitor()
