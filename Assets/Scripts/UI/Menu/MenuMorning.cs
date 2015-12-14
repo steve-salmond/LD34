@@ -36,6 +36,11 @@ public class MenuMorning : MonoBehaviour
             SetMessage(string.Format("Press buttons on your desk to feed specimens as they arrive - simple, right?", name));
             yield return StartCoroutine(WaitForOK());
         }
+        else if (day == 2)
+        {
+            SetMessage(string.Format("Clones are picky - feed each specimen nutrients in the proper order! (LEFT to RIGHT)"));
+            yield return StartCoroutine(WaitForOK());
+        }
         else
         {
             var index = Random.Range(0, DailyMessages.Count);

@@ -15,7 +15,7 @@ public class MusicManager : Singleton<MusicManager>
     public bool Playing
     { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         Playing = true;
         AudioSource = GetComponent<AudioSource>();
