@@ -16,10 +16,16 @@ public class CameraController : Singleton<CameraController>
     }
 
     public void LookAtMonitor()
-    { GoToWaypoint(MonitorWaypoint); }
+    {
+        GoToWaypoint(MonitorWaypoint);
+        MusicManager.Instance.LookingAtMonitor();
+    }
 
     public void LookAtWorkArea()
-    { GoToWaypoint(WorkingWaypoint); }
+    {
+        GoToWaypoint(WorkingWaypoint);
+        MusicManager.Instance.LookingAtWorkArea();
+    }
 
     public void GoToWaypoint(Transform waypoint)
     {
