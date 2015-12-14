@@ -60,6 +60,12 @@ public class Pod : MonoBehaviour
     /** Effect when pod moves. */
     public GameObject PodMovePrefab;
 
+    /** Effect when pod grows. */
+    public GameObject PodGrowthPrefab;
+
+    /** Effect when pod atrophies. */
+    public GameObject PodAtrophyPrefab;
+
     /** Effect when perfect pod is delivered. */
     public GameObject PodDeliverPerfectPrefab;
 
@@ -239,6 +245,11 @@ public class Pod : MonoBehaviour
         var old = GrowthTarget;
         GrowthTarget = Growth;
         DOTween.To(SetGrowth, old, GrowthTarget, 1.5f);
+
+        // Spawn growth effect.
+        var effectPrefab = GrowthTarget > old ? PodGrowthPrefab : PodAtrophyPrefab;
+        var effect = Instantiate(effectPrefab, transform.position, transform.rotation) as GameObject;
+        effect.transform.parent = transform;
 
         // Determine new water color.
         float fullSlots = Slots.Count(slot => slot.IsFull);
