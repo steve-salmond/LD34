@@ -28,6 +28,9 @@ public class NutrientDispenser : MonoBehaviour
     /** Nutrient button. */
     public NutrientButton Button;
 
+    /** Nutrient dispense effect. */
+    public GameObject NutrientDispensePrefab;
+
     /** Whether nutrient is being dispensed. */
     public bool Dispensing
     { get; private set; }
@@ -39,6 +42,7 @@ public class NutrientDispenser : MonoBehaviour
     /** Dispensers' label. */
     public Text Label
     { get; private set; }
+
 
 
     // Public Methods
@@ -121,6 +125,9 @@ public class NutrientDispenser : MonoBehaviour
         var blob = Instantiate<NutrientBlob>(NutrientConfig.BlobPrefab);
         blob.transform.position = Emitter.position;
         blob.Nutrient = Nutrient;
+
+        // Fire off the dispense effect.
+        Instantiate(NutrientDispensePrefab, Emitter.position, Emitter.rotation);
 
         // Wait until cooldown expires.
         yield return new WaitForSeconds(Cooldown);
