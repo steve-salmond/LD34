@@ -14,7 +14,7 @@ public class UIScreenFlash : Singleton<UIScreenFlash>
         Graphic = GetComponent<Graphic>();
     }
 
-    public void Flash(Color c, float alpha = 0.1f, float duration = 0.1f)
+    public void Flash(Color c, float duration = 0.1f, float alpha = 0.1f)
     {
         Graphic.color = new Color(c.r, c.g, c.b, 0);
 
@@ -22,6 +22,21 @@ public class UIScreenFlash : Singleton<UIScreenFlash>
             .Append(Graphic.DOFade(alpha, duration))
             .Append(Graphic.DOFade(0, duration));
     }
-    
-	
+
+    public void FadeIn(Color c, float duration = 1, float delay = 0, float alpha = 1)
+    {
+        Graphic.color = new Color(c.r, c.g, c.b, alpha);
+        DOTween.Sequence()
+            .AppendInterval(delay)
+            .Append(Graphic.DOFade(0, duration));
+    }
+
+    public void FadeOut(Color c, float duration = 1, float delay = 0, float alpha = 1)
+    {
+        Graphic.color = new Color(c.r, c.g, c.b, 0);
+        DOTween.Sequence()
+            .AppendInterval(delay)
+            .Append(Graphic.DOFade(alpha, duration));
+    }
+
 }

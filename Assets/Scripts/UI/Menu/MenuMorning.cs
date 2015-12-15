@@ -35,6 +35,8 @@ public class MenuMorning : MonoBehaviour
         {
             SetMessage(string.Format("Press buttons on your desk to feed specimens as they arrive - simple, right?", name));
             yield return StartCoroutine(WaitForOK());
+            SetMessage(string.Format("BUT - give each clone the nutrient <color=#5EF8FD>COLOR</color> it needs for optimum growth!\nRequired nutrients are displayed on each pod.", name));
+            yield return StartCoroutine(WaitForOK());
         }
         else if (day == 2)
         {

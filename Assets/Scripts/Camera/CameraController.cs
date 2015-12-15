@@ -19,6 +19,11 @@ public class CameraController : Singleton<CameraController>
         CameraRig.rotation = MonitorWaypoint.rotation;
     }
 
+    private void Start()
+    {
+        UIScreenFlash.Instance.FadeIn(Color.black, 3, 0.5f);
+    }
+
     private void Update()
     {
         UpdateAspect();

@@ -47,14 +47,14 @@ public class MenuWorking : MonoBehaviour
 
         if (day == 1)
         {
-            yield return StartCoroutine(MessageRoutine("Feed specimens the correct nutrients!"));
+            yield return StartCoroutine(MessageRoutine("REMEMBER - Feed specimens the correct <color=#5EF8FD>COLOR</color>!"));
 
             while (GameController.Instance.Score == 0)
                 yield return 0;
 
             var score = GameController.Instance.Score;
             if (score < 0)
-                yield return StartCoroutine(MessageRoutine("Oops! You need to feed specimens the correct nutrient color.."));
+                yield return StartCoroutine(MessageRoutine("Oops! You fed that one the WRONG COLOR.."));
 
             while (GameController.Instance.Score < 0)
                 yield return 0;
