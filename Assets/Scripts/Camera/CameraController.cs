@@ -60,4 +60,9 @@ public class CameraController : Singleton<CameraController>
         CameraRig.transform.DORotateQuaternion(waypoint.rotation, 1.5f).SetEase(Ease.OutBack);
     }
    
+    public void Shake()
+    {
+        Camera.DOShakePosition(1.0f, 0.025f);
+        Camera.DOShakeRotation(1.0f, 0.075f);
+    }
 }

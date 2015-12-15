@@ -43,10 +43,13 @@ public class MenuMorning : MonoBehaviour
         }
         else
         {
-            var index = Random.Range(0, DailyMessages.Count);
-            var message = DailyMessages[index];
-            DailyMessages.RemoveAt(index);
-            SetMessage(string.Format(message, name, day, days, quota));
+            if (DailyMessages.Count > 0)
+            {
+                var index = Random.Range(0, DailyMessages.Count);
+                var message = DailyMessages[index];
+                SetMessage(string.Format(message, name, day, days, quota));
+            }
+
             yield return StartCoroutine(WaitForOK());
         }
 

@@ -227,6 +227,8 @@ public class Pod : MonoBehaviour
         else
             Capsule.DOMoveY(-10, 0.5f).SetRelative();
 
+        CameraController.Instance.Shake();
+
     }
 
     /** Update the growth stage. */
